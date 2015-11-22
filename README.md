@@ -88,3 +88,9 @@ Returns how many items there are in the top section of the window.
 #### window.containerItems()
 
 Returns a list of `Item` instances from the top section of the window.
+
+## History
+
+### 0.0.0
+
+* Import from mineflayer
