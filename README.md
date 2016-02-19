@@ -91,6 +91,10 @@ Returns a list of `Item` instances from the top section of the window.
 
 ## History
 
+### 1.0.0
+
+* bump dependencies
+
 ### 0.0.0
 
 * Import from mineflayer
