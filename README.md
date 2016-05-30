@@ -91,6 +91,10 @@ Returns a list of `Item` instances from the top section of the window.
 
 ## History
 
+### 1.0.1
+
+* bump mcdata
+
 ### 1.0.0
 
 * bump dependencies
