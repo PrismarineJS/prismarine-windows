@@ -91,6 +91,10 @@ Returns a list of `Item` instances from the top section of the window.
 
 ## History
 
+### 1.1.0
+
+* added support for villager trading windows (thanks @plexigras)
+
 ### 1.0.1
 
 * bump mcdata
