@@ -1,8 +1,7 @@
-function loader(mcVersion)
-{
+function loader (mcVersion) {
   return {
-    windows:require("./lib/windows")(mcVersion)
+    windows: require('./lib/windows')(mcVersion)
   }
 }
 
-module.exports=loader;
+module.exports = loader
