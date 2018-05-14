@@ -1,5 +1,7 @@
 # prismarine-windows
 
+[![Build Status](https://circleci.com/gh/PrismarineJS/prismarine-windows/tree/master.svg?style=shield)](https://circleci.com/gh/PrismarineJS/prismarine-windows/tree/master)
+
 Represent minecraft windows
 
 ## Usage
