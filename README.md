@@ -93,6 +93,10 @@ Returns a list of `Item` instances from the top section of the window.
 
 ## History
 
+### 1.1.1
+
+* fix for tossed item when crafted (thanks @karang)
+
 ### 1.1.0
 
 * added support for villager trading windows (thanks @plexigras)
