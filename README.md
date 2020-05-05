@@ -7,17 +7,26 @@ Represent minecraft windows
 ## Usage
 
 ```js
-const windows=require("./")("1.8").windows;
-const Item=require("prismarine-item")("1.8");
+const windows = require('./')('1.8')
+const Item = require('prismarine-item')('1.8')
 
-const inv=new windows.InventoryWindow(1,"inv",36);
+const inv = windows.createWindow(1, 'minecraft:inventory', 'inv', 36)
 
-inv.updateSlot(10,new Item(256,1));
+inv.updateSlot(10, new Item(256, 1))
 
-console.log(inv.items());
+console.log(inv.items())
+
 ```
 
 ## API
+
+### windows.createWindow(id, type, title, slotCount = undefined)
+
+Create a window with:
+ * `id` - the window id
+ * `type` - this can be a string or a numeric id depending on the mcVersion
+ * `title` - the title of the window
+ * `slotCount` - used to set the number of slots for mcVersion prior to 1.14, ignored in 1.14
 
 ### windows.Window (base class)
 
@@ -68,17 +77,6 @@ Watching `bot.inventory.on("windowUpdate")` is the best way to watch for changes
  * `oldItem`, `newItem` - either an [`Item`](#mineflayeritem) instance or `null`.
 
 `newItem === window.slots[slot]`.
-
-### windows.InventoryWindow
-### windows.ChestWindow
-### windows.CraftingTableWindow
-### windows.FurnaceWindow
-### windows.DispenserWindow
-### windows.EnchantmentTableWindow
-### windows.BrewingStandWindow
-### windows.ContainerWindow
-
-Generic window that can be opened by some non-Vanilla servers and Bukkit plugins like Essentials' /invsee.
 
 #### window.containerCount(itemType, [metadata])
 Returns how many items there are in the top section of the window.

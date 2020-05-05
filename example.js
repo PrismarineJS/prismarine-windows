@@ -1,7 +1,7 @@
-const windows = require('./')('1.8').windows
+const windows = require('./')('1.8')
 const Item = require('prismarine-item')('1.8')
 
-const inv = new windows.InventoryWindow(1, 'inv', 36)
+const inv = windows.createWindow(1, 'minecraft:inventory', 'inv', 36)
 
 inv.updateSlot(10, new Item(256, 1))
 
