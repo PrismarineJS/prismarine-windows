@@ -70,8 +70,7 @@ function loader (mcVersion) {
           requireConfirmation: type !== 'minecraft:container'
         }
       }
-      if (slotCount === undefined) slotCount = winData.slots
-      else slotCount += 36
+      slotCount = winData.slots
       return new Window(id, winData.key, title, slotCount, winData.inventory, winData.craft, winData.requireConfirmation)
     },
     Window,
