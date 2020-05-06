@@ -72,7 +72,7 @@ function loader (mcVersion) {
       }
       if (slotCount === undefined) slotCount = winData.slots
       else slotCount += 36
-      return new Window(id, winData.key, title, slotCount, winData.inventory, winData.craft)
+      return new Window(id, winData.key, title, slotCount, winData.inventory, winData.craft, winData.requireConfirmation)
     },
     Window,
     windows
