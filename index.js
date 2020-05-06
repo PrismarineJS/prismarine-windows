@@ -64,13 +64,14 @@ function loader (mcVersion) {
         winData = {
           type,
           key: type,
-          inventory: { start: slotCount - 36, end: slotCount - 1 },
-          slots: slotCount,
+          inventory: { start: slotCount, end: slotCount + 35 },
+          slots: slotCount + 36,
           craft: -1,
           requireConfirmation: type !== 'minecraft:container'
         }
       }
       if (slotCount === undefined) slotCount = winData.slots
+      else slotCount += 36
       return new Window(id, winData.key, title, slotCount, winData.inventory, winData.craft)
     },
     Window,
