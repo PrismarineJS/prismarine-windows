@@ -34,7 +34,7 @@ function loader (mcVersion) {
   } else {
     // https://wiki.vg/index.php?title=Inventory&oldid=14093
     windows = {
-      'minecraft:inventory': { type: 'minecraft:inventory', inventory: { start: 9, end: 44 }, slots: 46, craft: 0, requireConfirmation: true },
+      'minecraft:inventory': { type: 'minecraft:inventory', inventory: { start: 9, end: 44 }, slots: mcVersion.startsWith('1.8') ? 45 : 46, craft: 0, requireConfirmation: true },
       'minecraft:chest': null,
       'minecraft:crafting_table': { type: 'minecraft:crafting_table', inventory: { start: 10, end: 45 }, slots: 46, craft: 0, requireConfirmation: true },
       'minecraft:furnace': { type: 'minecraft:furnace', inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true },
