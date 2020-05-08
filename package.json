@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run lint",
-    "lint": "standard"
+    "lint": "standard",
+    "fix": "standard --fix"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,7 @@
   },
   "devDependencies": {
     "minecraft-data": "^2.0.0",
-    "standard": "^11.0.1"
+    "standard": "^14.3.3"
   },
   "keywords": [
     "minecraft",
