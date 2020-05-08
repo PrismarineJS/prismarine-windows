@@ -91,6 +91,12 @@ Returns a list of `Item` instances from the top section of the window.
 
 ## History
 
+### 1.2.0
+
+bunch of changes by Karang :
+* refactored
+* more windows for both 1.14 and before
+
 ### 1.1.1
 
 * fix for tossed item when crafted (thanks @karang)
