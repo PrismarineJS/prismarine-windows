@@ -91,6 +91,10 @@ Returns a list of `Item` instances from the top section of the window.
 
 ## History
 
+### 1.3.0
+
+* 1.15 support
+
 ### 1.2.0
 
 bunch of changes by Karang :
