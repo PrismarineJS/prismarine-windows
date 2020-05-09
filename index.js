@@ -3,7 +3,7 @@ function loader (mcVersion) {
   const Window = require('./lib/Window')(Item)
 
   let windows
-  if (mcVersion.startsWith('1.14')) {
+  if (mcVersion.startsWith('1.14') || mcVersion.startsWith('1.15')) {
     // https://wiki.vg/Inventory
     windows = {
       'minecraft:inventory': { type: -1, inventory: { start: 9, end: 44 }, slots: 46, craft: 0, requireConfirmation: true },
