@@ -91,6 +91,10 @@ Returns a list of `Item` instances from the top section of the window.
 
 ## History
 
+### 1.4.0
+
+* typescript definitions (thanks @IdanHo)
+
 ### 1.3.0
 
 * 1.15 support
