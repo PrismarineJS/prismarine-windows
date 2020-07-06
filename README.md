@@ -1,6 +1,6 @@
 # prismarine-windows
 
-[![Build Status](https://circleci.com/gh/PrismarineJS/prismarine-windows/tree/master.svg?style=shield)](https://circleci.com/gh/PrismarineJS/prismarine-windows/tree/master)
+[![Build Status](https://github.com/PrismarineJS/prismarine-windows/workflows/CI/badge.svg)](https://github.com/PrismarineJS/prismarine-windows/actions?query=workflow%3A%22CI%22)
 
 Represent minecraft windows
 
