@@ -85,10 +85,6 @@ Returns how many items there are in the top section of the window.
  * `metadata` - (optional) metadata value that you are looking for.
    defaults to unspecified
 
-#### window.containerItems()
-
-Returns a list of `Item` instances from the top section of the window.
-
 ## History
 
 ### 1.5.0
