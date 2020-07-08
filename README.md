@@ -46,9 +46,9 @@ Map of slot index to `Item` instance.
 
 In vanilla client, this is the item you are holding with the mouse cursor.
 
-#### window.findInventoryItem(itemType, metadata, [notFull])
+#### window.findInventoryItem(item, metadata, [notFull])
 
- * `itemType` - numerical id that you are looking for
+ * `item` - numerical id or name that you are looking for
  * `metadata` -  metadata value that you are looking for. `null`
    means unspecified.
  * `notFull` - (optional) - if `true`, means that the returned
