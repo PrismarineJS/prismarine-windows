@@ -87,6 +87,10 @@ Returns how many items there are in the top section of the window.
 
 ## History
 
+### 1.6.0
+
+* Add ability to find items by name (thanks @Naomi)
+
 ### 1.5.0
 
 * 1.16.0 compat (thanks @DrakoTrogdor)
