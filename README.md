@@ -48,7 +48,7 @@ In vanilla client, this is the item you are holding with the mouse cursor.
 
 #### window.findInventoryItem(item, metadata, [notFull])
 
- * `item` - numerical id or name that you are looking for
+ * `item` - numerical id or name that you are looking for [check the list](https://minecraft-data.prismarine.js.org/?d=items)
  * `metadata` -  metadata value that you are looking for. `null`
    means unspecified.
  * `notFull` - (optional) - if `true`, means that the returned
