@@ -2,7 +2,7 @@
 
 [![Build Status](https://github.com/PrismarineJS/prismarine-windows/workflows/CI/badge.svg)](https://github.com/PrismarineJS/prismarine-windows/actions?query=workflow%3A%22CI%22)
 
-Represent minecraft windows
+Represent minecraft windows. Check [mineflayer-web-inventory](https://github.com/ImHarvol/mineflayer-web-inventory) to display windows
 
 ## Usage
 
