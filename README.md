@@ -78,12 +78,11 @@ Watching `bot.inventory.on("windowUpdate")` is the best way to watch for changes
 
 `newItem === window.slots[slot]`.
 
-#### window.containerCount(itemType, [metadata])
-Returns how many items there are in the top section of the window.
+#### window.itemsRange(start, end)
+Returns a list of `Item` instances between the start and end slots given
 
- * `itemType` - numerical id that you are looking for
- * `metadata` - (optional) metadata value that you are looking for.
-   defaults to unspecified
+ * `start` - index of first slot
+ * `end` - index of last slot
 
 ## History
 
