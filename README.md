@@ -68,12 +68,20 @@ Returns a list of `Item` instances from the inventory section of the window.
 
 #### window.emptySlotCount()
 
-#### window "windowUpdate" (slot, oldItem, newItem)
+#### window "updateSlot" (slot, oldItem, newItem)
 
 Fired whenever any slot in the window changes for any reason.
-Watching `bot.inventory.on("windowUpdate")` is the best way to watch for changes in your inventory.
+Watching `bot.inventory.on("updateSlot")` is the best way to watch for changes in your inventory.
 
  * `slot` - index of changed slot.
+ * `oldItem`, `newItem` - either an [`Item`](#mineflayeritem) instance or `null`.
+
+`newItem === window.slots[slot]`.
+
+#### window "updateSlot:slot" (oldItem, newItem)
+
+Fired whenever a specific slot in the window changes for any reason.
+
  * `oldItem`, `newItem` - either an [`Item`](#mineflayeritem) instance or `null`.
 
 `newItem === window.slots[slot]`.
