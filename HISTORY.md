@@ -1,3 +1,8 @@
+### 2.0.0
+
+* Fix 1.16 wrong ids, add utility functions
+* BREAKING: update event changed from `windowUpdate` to `updateSlot`
+
 ### 1.6.0
 
 * Add ability to find items by name (thanks @Naomi)
