@@ -218,6 +218,13 @@ Returns how many empty slots you have in the inventory section of the window.
 
 Returns the property: `requiresConfirmation`.
 
+#### window.clear([blockId], [count])
+
+Sets all slots in the window to null (unless specified by args)
+
++ `blockId` - (optional) numerical id of the block that you would like to clear
++ `count` - (optional, requires blockId) only delete this number of the given block
+
 ### Events
 
 #### window "updateSlot" (slot, oldItem, newItem)
