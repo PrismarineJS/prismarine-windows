@@ -33,6 +33,7 @@ declare class Window extends EventEmitter {
     items(): Array<Item>;
     emptySlotCount(): number;
     transactionRequiresConfirmation(click?: Click): boolean;
+    clear(blockId?, count?): void;
 }
 declare interface Click {
     mode: number;
