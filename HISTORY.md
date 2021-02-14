@@ -1,3 +1,7 @@
+### 2.1.0
+
+* Add clear function (@U9G)
+
 ### 2.0.0
 
 * Fix 1.16 wrong ids, add utility functions
