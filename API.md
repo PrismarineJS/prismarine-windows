@@ -72,7 +72,7 @@ Title of the window, shown in the gui.
 
 #### window.slots
 
-Map of slot index to `Item` instance. `null` if the slot is empty.
+array of all slots in the window, each slot is an instance of `Item` or `null` if the slot is empty.
 
 #### window.inventoryStart
 
