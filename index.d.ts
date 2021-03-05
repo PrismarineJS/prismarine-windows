@@ -23,7 +23,7 @@ declare class Window extends EventEmitter {
     acceptSwapAreaLeftClick(click: Click): void;
     acceptCraftingClick(click: Click): void;
     updateSlot(slot: number, newItem: Item): void;
-    findItemRange(start: number, end: number, itemType: number, metadata: number | null, notFull: boolean): Item | null;
+    findItemRange(start: number, end: number, itemType: number, metadata: number | null, notFull: boolean, nbt: any): Item | null;
     findInventoryItem(itemType: number, metadata: number | null, notFull: boolean): Item | null;
     firstEmptySlotRange(start: number, end: number): number | null;
     firstEmptyInventorySlot(): number | null;
