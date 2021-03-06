@@ -24,7 +24,7 @@
     - [window.acceptSwapAreaLeftClick(click)](#windowacceptswaparealeftclickclick)
     - [window.acceptCraftingClick(click)](#windowacceptcraftingclickclick)
     - [window.updateSlot(slot, newItem)](#windowupdateslotslot-newitem)
-    - [window.findItemRange(start, end, itemType, metadata, [notFull])](#windowfinditemrangestart-end-itemtype-metadata-notfull)
+    - [window.findItemRange(start, end, itemType, metadata, [notFull], null)](#windowfinditemrangestart-end-itemtype-metadata-notfull)
     - [window.findItemRangeName(start, end, itemName, metadata, [notFull])](#windowfinditemrangenamestart-end-itemname-metadata-notfull)
     - [window.findInventoryItem(item, metadata, [notFull])](#windowfindinventoryitemitem-metadata-notfull)
     - [window.findContainerItem(item, metadata, [notFull])](#windowfindcontaineritemitem-metadata-notfull)
@@ -118,7 +118,7 @@ In vanilla client, this is the item you are holding with the mouse cursor.
 
 Change the `slot` to contain the `newItem`. Emit the `updateSlot` events.
 
-#### window.findItemRange(start, end, itemType, metadata, [notFull])
+#### window.findItemRange(start, end, itemType, metadata, [notFull], nbt)
 
  * `start` - start slot to begin the search from
  * `end` - end slot to end the search
@@ -127,6 +127,8 @@ Change the `slot` to contain the `newItem`. Emit the `updateSlot` events.
    means unspecified.
  * `notFull` - (optional) - if `true`, means that the returned
    item should not be at its `stackSize`.
+ * `nbt` - nbt data for the item you are looking for. `null` 
+   means unspecified
 
 #### window.findItemRangeName(start, end, itemName, metadata, [notFull])
 
