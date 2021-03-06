@@ -1,6 +1,10 @@
+### 2.2.0
+
+* make nbt the fifth parameter of finditemrange (thanks @U9G)
+
 ### 2.1.0
 
-* Add clear function (@U9G)
+* Add clear function (thanks @U9G)
 
 ### 2.0.0
 
