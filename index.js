@@ -8,7 +8,11 @@ function loader (mcVersion) {
     // https://wiki.vg/Inventory
     windows = {}
     let protocolId = -1
-    windows['minecraft:inventory'] = { type: protocolId++, inventory: { start: 9, end: 44 }, slots: 46, craft: 0, requireConfirmation: true }
+    if (mcData.isNewerOrEqualTo('1.9')) {
+      windows['minecraft:inventory'] = { type: protocolId++, inventory: { start: 9, end: 45 }, slots: 47, craft: 0, requireConfirmation: true }
+    } else {
+      windows['minecraft:inventory'] = { type: protocolId++, inventory: { start: 9, end: 44 }, slots: 46, craft: 0, requireConfirmation: true }
+    }
     windows['minecraft:generic_9x1'] = { type: protocolId++, inventory: { start: 1 * 9, end: 1 * 9 + 35 }, slots: 1 * 9 + 36, craft: -1, requireConfirmation: true }
     windows['minecraft:generic_9x2'] = { type: protocolId++, inventory: { start: 2 * 9, end: 2 * 9 + 35 }, slots: 2 * 9 + 36, craft: -1, requireConfirmation: true }
     windows['minecraft:generic_9x3'] = { type: protocolId++, inventory: { start: 3 * 9, end: 3 * 9 + 35 }, slots: 3 * 9 + 36, craft: -1, requireConfirmation: true }
