@@ -19,12 +19,12 @@ declare class Window extends EventEmitter {
     mouseClick(click: Click): void;
     shiftClick(click: Click): void;
     numberClick(click: Click): void;
-    creativeClick(click: Click): void;
     dropClick(click: Click): void;
-    fillAndDump(item: Item, start: number, end: number): void;
-    fillSlotsWithItem(slots: Array<Item>, item: Item): void;
-    fillSlotWithItem(item: Item, everything: boolean, item2: Item): void;
-    dumpLeftover(item: Item, start: number, end: number): void;
+    fillAndDump(item: Item, start: number, end: number, lastToFirst: boolean): void;
+    fillSlotsWithItem(slots: Array<Item>, item: Item, lastToFirst: boolean): void;
+    fillSlotWithItem(itemToFill: Item, itemToTake: Item): void;
+    fillSlotWithSelectedItem (item: Item, everything: boolean): void;
+    dumpItem(item: Item, start: number, end: number, lastToFirst: boolean): void;
     splitSlot(item: Item): void;
     swapSelectedItem(item: Item): void;
     dropSelectedItem(all: boolean): void;
