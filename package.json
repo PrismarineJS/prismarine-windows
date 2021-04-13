@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run lint",
+    "testclicks": "node test.js",
     "lint": "standard",
     "fix": "standard --fix"
   },
@@ -13,8 +14,8 @@
     "url": "git+ssh://git@github.com/PrismarineJS/prismarine-windows.git"
   },
   "dependencies": {
-    "minecraft-data": "^2.74.0",
-    "prismarine-item": "^1.5.0"
+    "minecraft-data": "^2.81.0",
+    "prismarine-item": "^1.8.0"
   },
   "devDependencies": {
     "@types/node": "^14.0.1",
