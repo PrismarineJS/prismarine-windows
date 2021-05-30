@@ -56,7 +56,7 @@ declare class Window extends EventEmitter {
      * In vanilla client, this is the item you are holding with the mouse cursor.
      */
     selectedItem: Item | null;
-  
+    
     acceptClick(click: Click): void;
   
     /**
@@ -281,7 +281,7 @@ declare class Window extends EventEmitter {
      * @param blockId (optional) numerical id of the block that you would like to clear
      * @param count (optional, requires blockId) only delete this number of the given block
      */
-    clear(blockId?, count?): void;
+    clear(blockId?: number, count?: number): void;
 }
 declare interface Click {
     mode: number;
