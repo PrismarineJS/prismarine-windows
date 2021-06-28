@@ -98,7 +98,7 @@ declare class Window extends EventEmitter {
      * @param metadata metadata value that you are looking for. null means unspecified
      * @param notFull (optional) - if true, means that the returned item should not be at its stackSize
      */
-    findInventoryItem(itemType: number, metadata: number | null, notFull: boolean): Item | null;
+    findInventoryItem(itemType: number | string, metadata: number | null, notFull: boolean): Item | null;
 
     /**
      * Search in the container of the window
