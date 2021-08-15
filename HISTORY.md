@@ -1,3 +1,7 @@
+### 2.2.1
+
+* Avoid emitting references (@imharvol)
+
 ### 2.2.0
 
 * make nbt the fifth parameter of finditemrange (thanks @U9G)
