@@ -100,7 +100,7 @@ In vanilla client, this is the item you are holding with the mouse cursor.
 
 ### Methods
 
-#### window.acceptClick(click) 
+#### window.acceptClick(click)
 
 #### window.acceptOutsideWindowClick(click)
 
@@ -110,9 +110,13 @@ In vanilla client, this is the item you are holding with the mouse cursor.
 
 #### window.acceptSwapAreaRightClick(click)
 
-#### window.acceptSwapAreaLeftClick(click) 
+#### window.acceptSwapAreaLeftClick(click)
 
 #### window.acceptCraftingClick(click)
+
+Change the `slot` to contain the `newItem`. Emit the `updateSlot` events.
+
+Returns a list of changed slots mirroring the [Window Click packet format](https://github.com/PrismarineJS/minecraft-data/blob/master/data/pc/1.17.1/protocol.json#L4831-L4852)
 
 #### window.updateSlot(slot, newItem)
 
@@ -127,7 +131,7 @@ Change the `slot` to contain the `newItem`. Emit the `updateSlot` events.
    means unspecified.
  * `notFull` - (optional) - if `true`, means that the returned
    item should not be at its `stackSize`.
- * `nbt` - nbt data for the item you are looking for. `null` 
+ * `nbt` - nbt data for the item you are looking for. `null`
    means unspecified
 
 #### window.findItemRangeName(start, end, itemName, metadata, [notFull])
