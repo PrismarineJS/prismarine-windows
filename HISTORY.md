@@ -1,3 +1,7 @@
+### 2.3.0
+
+* Click API endpoints returns changedSlots array (@nickelpro)
+
 ### 2.2.1
 
 * Avoid emitting references (@imharvol)
