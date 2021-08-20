@@ -106,7 +106,7 @@ declare class Window extends EventEmitter {
      * @param metadata metadata value that you are looking for. null means unspecified
      * @param notFull (optional) - if true, means that the returned item should not be at its stackSize
      */
-    findContainerItem(itemType: number, metadata: number | null, notFull: boolean)
+    findContainerItem(itemType: number, metadata: number | null, notFull: boolean): Item | null
 
     /**
      * Return the id of the first empty slot between start and end
