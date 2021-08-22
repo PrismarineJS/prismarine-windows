@@ -1,3 +1,6 @@
+### 2.4.1
+* revert avoid emitting references
+
 ### 2.4.0
 
 * fix bug with emitting null items (@imharvol)
