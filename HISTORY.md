@@ -1,3 +1,9 @@
+### 2.4.0
+
+* fix bug with emitting null items (@imharvol)
+* add typings to containerType
+* fix slot count for generic 3x3 containers
+
 ### 2.3.0
 
 * Click API endpoints returns changedSlots array (@nickelpro)
