@@ -4,6 +4,8 @@
 import {EventEmitter} from 'events';
 import {Item} from 'prismarine-item';
 
+export = loader
+
 declare class Window extends EventEmitter {
     constructor (id: number, type: number | string, title: string, slotCount: number, inventorySlotsRange: { start: number, end: number }, craftingResultSlot: number, requiresConfirmation: boolean);
 
@@ -205,6 +207,34 @@ declare interface WindowInfo {
 declare interface WindowsExports {
     createWindow(id: number, type: number | string, title: string, slotCount?: number): Window;
     Window: typeof Window;
-    windows: {[key: string]: WindowInfo};
+    windows: {[key in WindowName]: WindowInfo};
 }
+
 export declare function loader(mcVersion: string): WindowsExports;
+
+type WindowName = 
+    'minecraft:inventory' |
+    'minecraft:generic_9x1' |
+    'minecraft:generic_9x2' |
+    'minecraft:generic_9x3' |
+    'minecraft:generic_9x4' |
+    'minecraft:generic_9x5' |
+    'minecraft:generic_9x6' |
+    'minecraft:generic_3x3' |
+    'minecraft:anvil' |
+    'minecraft:beacon' |
+    'minecraft:blast_furnace' |
+    'minecraft:brewing_stand' |
+    'minecraft:crafting' |
+    'minecraft:enchantment' |
+    'minecraft:furnace' |
+    'minecraft:grindstone' |
+    'minecraft:hopper' |
+    'minecraft:lectern' |
+    'minecraft:loom' |
+    'minecraft:merchant' |
+    'minecraft:shulker_box' |
+    'minecraft:smithing' |
+    'minecraft:smoker' |
+    'minecraft:cartography' |
+    'minecraft:stonecutter'
