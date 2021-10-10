@@ -1,3 +1,6 @@
+## 2.4.2
+* Fixed Exporting correctly and better window typings (#49)
+
 ### 2.4.1
 * revert avoid emitting references
 
