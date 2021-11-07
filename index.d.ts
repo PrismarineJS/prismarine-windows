@@ -4,9 +4,7 @@
 import {EventEmitter} from 'events';
 import {Item} from 'prismarine-item';
 
-export = loader
-
-declare class Window extends EventEmitter {
+export class Window extends EventEmitter {
     constructor (id: number, type: number | string, title: string, slotCount: number, inventorySlotsRange: { start: number, end: number }, craftingResultSlot: number, requiresConfirmation: boolean);
 
     /**
@@ -191,12 +189,12 @@ declare class Window extends EventEmitter {
      */
     clear(blockId?: number, count?: number): void;
 }
-declare interface Click {
+export interface Click {
     mode: number;
     mouseButton: number;
     slot: number;
 }
-declare interface WindowInfo {
+export interface WindowInfo {
     type: number | string;
     inventory: { start: number, end: number };
     slots: number;
@@ -204,7 +202,7 @@ declare interface WindowInfo {
     requireConfirmation: boolean;
 }
 
-declare interface WindowsExports {
+export interface WindowsExports {
     createWindow(id: number, type: number | string, title: string, slotCount?: number): Window;
     Window: typeof Window;
     windows: {[key in WindowName]: WindowInfo};
@@ -212,7 +210,9 @@ declare interface WindowsExports {
 
 export declare function loader(mcVersion: string): WindowsExports;
 
-type WindowName = 
+export default loader;
+
+export type WindowName = 
     'minecraft:inventory' |
     'minecraft:generic_9x1' |
     'minecraft:generic_9x2' |
