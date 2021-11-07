@@ -1,3 +1,6 @@
+## 2.4.3
+* fixed typescript typings
+
 ## 2.4.2
 * Fixed Exporting correctly and better window typings (#49)
 
