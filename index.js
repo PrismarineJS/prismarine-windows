@@ -1,7 +1,7 @@
 function loader (mcVersion) {
   const Item = require('prismarine-item')(mcVersion)
-  const Window = require('./lib/Window')(Item)
   const mcData = require('minecraft-data')(mcVersion)
+  const Window = require('./lib/Window')(Item, mcData)
 
   let windows
   if (mcData.isNewerOrEqualTo('1.14')) {
@@ -57,7 +57,7 @@ function loader (mcVersion) {
   }
 
   const windowByType = new Map()
-  for (const key of Object.keys(windows)) {
+  for (const key in windows) {
     const win = windows[key]
     if (win) {
       windowByType.set(win.type, win)
@@ -67,8 +67,7 @@ function loader (mcVersion) {
 
   return {
     createWindow: (id, type, title, slotCount = undefined) => {
-      let winData = windowByType.get(type)
-      if (!winData) winData = windows[type]
+      let winData = windowByType.get(type) || windows[type]
       if (!winData) {
         if (slotCount === undefined) return null
         winData = {
