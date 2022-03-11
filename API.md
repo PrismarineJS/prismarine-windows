@@ -23,7 +23,6 @@
     - [window.acceptSwapAreaRightClick(click)](#windowacceptswaparearightclickclick)
     - [window.acceptSwapAreaLeftClick(click)](#windowacceptswaparealeftclickclick)
     - [window.acceptCraftingClick(click)](#windowacceptcraftingclickclick)
-    - [window.updateSlot(slot, newItem)](#windowupdateslotslot-newitem)
     - [window.findItemRange(start, end, itemType, metadata, [notFull], null)](#windowfinditemrangestart-end-itemtype-metadata-notfull)
     - [window.findItemRangeName(start, end, itemName, metadata, [notFull])](#windowfinditemrangenamestart-end-itemname-metadata-notfull)
     - [window.findInventoryItem(item, metadata, [notFull])](#windowfindinventoryitemitem-metadata-notfull)
@@ -117,10 +116,6 @@ In vanilla client, this is the item you are holding with the mouse cursor.
 Change the `slot` to contain the `newItem`. Emit the `updateSlot` events.
 
 Returns a list of changed slots mirroring the [Window Click packet format](https://github.com/PrismarineJS/minecraft-data/blob/master/data/pc/1.17.1/protocol.json#L4831-L4852)
-
-#### window.updateSlot(slot, newItem)
-
-Change the `slot` to contain the `newItem`. Emit the `updateSlot` events.
 
 #### window.findItemRange(start, end, itemType, metadata, [notFull], nbt)
 
