@@ -14,10 +14,12 @@
   },
   "dependencies": {
     "minecraft-data": "^2.74.0",
+    "mocha": "^9.2.2",
     "prismarine-item": "^1.5.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.4",
+    "prismarine-windows": "file:.",
     "standard": "^16.0.3"
   },
   "keywords": [
