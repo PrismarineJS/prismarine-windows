@@ -2,9 +2,9 @@ function loader (mcVersion) {
   const Item = require('prismarine-item')(mcVersion)
   const Window = require('./lib/Window')(Item)
   const mcData = require('minecraft-data')(mcVersion)
-
+  const windowSupportLevel = mcData.supportFeature('windowSupportLevel')
   let windows
-  if (mcData.isNewerOrEqualTo('1.14')) {
+  if (windowSupportLevel >= 2) {
     // https://wiki.vg/Inventory
     windows = {}
     let protocolId = -1
@@ -29,13 +29,13 @@ function loader (mcVersion) {
     windows['minecraft:loom'] = { type: protocolId++, inventory: { start: 4, end: 39 }, slots: 40, craft: 3, requireConfirmation: true }
     windows['minecraft:merchant'] = { type: protocolId++, inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true }
     windows['minecraft:shulker_box'] = { type: protocolId++, inventory: { start: 27, end: 62 }, slots: 63, craft: -1, requireConfirmation: true }
-    if (mcData.isNewerOrEqualTo('1.16')) {
+    if (windowSupportLevel === 3) {
       windows['minecraft:smithing'] = { type: protocolId++, inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true }
     }
     windows['minecraft:smoker'] = { type: protocolId++, inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true }
     windows['minecraft:cartography'] = { type: protocolId++, inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true }
     windows['minecraft:stonecutter'] = { type: protocolId++, inventory: { start: 2, end: 37 }, slots: 38, craft: 1, requireConfirmation: true }
-  } else {
+  } else if (windowSupportLevel === 1) {
     // https://wiki.vg/index.php?title=Inventory&oldid=14093
     windows = {
       'minecraft:inventory': { type: 'minecraft:inventory', inventory: { start: 9, end: 44 }, slots: mcData.isNewerOrEqualTo('1.9') ? 46 : 45, craft: 0, requireConfirmation: true },
@@ -54,6 +54,8 @@ function loader (mcVersion) {
       'minecraft:shulker_box': { type: 'minecraft:shulker_box', inventory: { start: 27, end: 62 }, slots: 63, craft: -1, requireConfirmation: true },
       EntityHorse: null
     }
+  } else {
+    throw new Error("Don't know the window types for this mc version")
   }
 
   const windowByType = new Map()
