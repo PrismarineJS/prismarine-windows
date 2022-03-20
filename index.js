@@ -1,7 +1,7 @@
 function loader (mcVersion) {
   const Item = require('prismarine-item')(mcVersion)
-  const Window = require('./lib/Window')(Item)
   const mcData = require('minecraft-data')(mcVersion)
+  const Window = require('./lib/Window')(mcData, Item)
 
   let windows
   if (mcData.isNewerOrEqualTo('1.14')) {
