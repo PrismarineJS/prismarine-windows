@@ -1,6 +1,6 @@
 {
   "name": "prismarine-windows",
-  "version": "2.4.3",
+  "version": "2.4.4",
   "description": "Represent minecraft windows",
   "main": "index.js",
   "scripts": {
