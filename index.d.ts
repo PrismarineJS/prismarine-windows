@@ -283,12 +283,12 @@ declare class Window extends EventEmitter {
      */
     clear(blockId?: number, count?: number): void;
 }
-declare interface Click {
+export interface Click {
     mode: number;
     mouseButton: number;
     slot: number;
 }
-declare interface WindowInfo {
+export interface WindowInfo {
     type: number | string;
     inventory: { start: number, end: number };
     slots: number;
@@ -296,9 +296,38 @@ declare interface WindowInfo {
     requireConfirmation: boolean;
 }
 
-declare interface WindowsExports {
+export interface WindowsExports {
     createWindow(id: number, type: number | string, title: string, slotCount?: number): Window;
     Window: typeof Window;
     windows: {[key: string]: WindowInfo};
 }
 export declare function loader(mcVersion: string): WindowsExports;
+
+export default loader;
+
+export type WindowName = 
+    'minecraft:inventory' |
+    'minecraft:generic_9x1' |
+    'minecraft:generic_9x2' |
+    'minecraft:generic_9x3' |
+    'minecraft:generic_9x4' |
+    'minecraft:generic_9x5' |
+    'minecraft:generic_9x6' |
+    'minecraft:generic_3x3' |
+    'minecraft:anvil' |
+    'minecraft:beacon' |
+    'minecraft:blast_furnace' |
+    'minecraft:brewing_stand' |
+    'minecraft:crafting' |
+    'minecraft:enchantment' |
+    'minecraft:furnace' |
+    'minecraft:grindstone' |
+    'minecraft:hopper' |
+    'minecraft:lectern' |
+    'minecraft:loom' |
+    'minecraft:merchant' |
+    'minecraft:shulker_box' |
+    'minecraft:smithing' |
+    'minecraft:smoker' |
+    'minecraft:cartography' |
+    'minecraft:stonecutter'
