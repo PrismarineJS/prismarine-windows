@@ -48,7 +48,7 @@ declare class Window extends EventEmitter {
     craftingResultSlot: number;
 
     /**
-     * boolean only false for chests in pre-1.14 versions.
+     * Boolean only false for chests in pre-1.14 versions.
      */
     requiresConfirmation: boolean;
 
@@ -64,27 +64,27 @@ declare class Window extends EventEmitter {
      */
   
     /**
-     * accepts click mode 0 with mouseButton 0 or 1
+     * Accepts click mode 0 with mouseButton 0 or 1
      */
     mouseClick(click: Click): void;
   
     /**
-     * accepts click mode 1 with mouseButton 0 or 1 (identical behaviour)
+     * Accepts click mode 1 with mouseButton 0 or 1 (identical behaviour)
      */
     shiftClick(click: Click): void;
  
     /**
-     * accepts click mode 2 with mouseButton 0 (hotbarStart) to 8 (hotbarEnd) representing the hotbar slots
+     * Accepts click mode 2 with mouseButton 0 (hotbarStart) to 8 (hotbarEnd) representing the hotbar slots
      */
     numberClick(click: Click): void;
   
     /**
-     * accepts click mode 4 with mouseButton 0 (drops one of the item) or 1 (drops all of the item) 
+     * Accepts click mode 4 with mouseButton 0 (drops one of the item) or 1 (drops all of the item) 
      */
     dropClick(click: Click): void;
   
     /**
-     * fills matching Slots within specified range with given item and if after filling the item is still present it searches for an empty slot in the range
+     * Fills within specified range with given item and dumps remaining items if present and possible
      * @param item item used to fill slots
      * @param start start slot to begin the search from
      * @param end end slot to end the search
@@ -93,28 +93,28 @@ declare class Window extends EventEmitter {
     fillAndDump(item: Item, start: number, end: number, lastToFirst: boolean): void;
   
     /**
-     * fills slots with specified item
+     * Fills slots with specified item
      * @param slots slots to fill with the item
      * @param lastToFirst if true the matching Slots will be filled from the back
      */
     fillSlotsWithItem(slots: Array<Item>, item: Item, lastToFirst: boolean): void;
   
     /**
-     * fills slot with specified item
+     * Fills slot with specified item
      * @param itemToFill item of which the count should be increased
      * @param itemToTake item of which the count should be decreased
      */
     fillSlotWithItem(itemToFill: Item, itemToTake: Item): void;
   
     /**
-     * fills slot with selectedItem (the item held in mouse cursor)
+     * Fills slot with selectedItem (the item held in mouse cursor)
      * @param item item of which the count should be increased
      * @param everything if true as many as possible will be transfered
      */
     fillSlotWithSelectedItem (item: Item, everything: boolean): void;
   
     /**
-     * searches for empty slot to dump the specified item
+     * Searches for empty slot to dump the specified item
      * @param item item which should be dumped
      * @param start start slot to begin the search from
      * @param end end slot to end the search
@@ -123,19 +123,19 @@ declare class Window extends EventEmitter {
     dumpItem(item: Item, start: number, end: number, lastToFirst: boolean): void;
   
     /**
-     * splits the slot in half and holds the split in mouse cursor
+     * Splits the slot in half and holds the split in mouse cursor
      * @param item item to split
      */
     splitSlot(item: Item): void;
   
     /**
-     * swaps item with the item in mouse cursor
+     * Swaps item with the item in mouse cursor
      * @param item item to swap with
      */
     swapSelectedItem(item: Item): void;
   
     /**
-     * drops item held in mouse cursor
+     * Drops item held in mouse cursor
      * @param all if true whole item stack will be dropped (else just one)
      */
     dropSelectedItem(all: boolean): void;
@@ -148,8 +148,7 @@ declare class Window extends EventEmitter {
     updateSlot(slot: number, newItem: Item): void;
 
     /**
-     * 
-     * returns array of items in the given range matching the one specified
+     * Returns array of items in the given range matching the one specified
      * @param start start slot to begin the search from
      * @param end end slot to end the search
      * @param itemType numerical id that you are looking for
@@ -160,7 +159,7 @@ declare class Window extends EventEmitter {
     findItemsRange(start: number, end: number, itemType: number, metadata: number | null, notFull: boolean, nbt: any): Array<Item> | null;
 
     /**
-     * returns item in the given range matching the one specified
+     * Returns item in the given range matching the one specified
      * @param start start slot to begin the search from
      * @param end end slot to end the search
      * @param itemType numerical id that you are looking for
