@@ -4,7 +4,7 @@
 import {EventEmitter} from 'events';
 import {Item} from 'prismarine-item';
 
-export class Window extends EventEmitter {
+declare class Window extends EventEmitter {
     constructor (id: number, type: number | string, title: string, slotCount: number, inventorySlotsRange: { start: number, end: number }, craftingResultSlot: number, requiresConfirmation: boolean);
 
     /**
@@ -56,16 +56,90 @@ export class Window extends EventEmitter {
      * In vanilla client, this is the item you are holding with the mouse cursor.
      */
     selectedItem: Item | null;
-
+    
     acceptClick(click: Click): void;
-    acceptOutsideWindowClick(click: Click): void;
-    acceptInventoryClick(click: Click): void;
-    acceptNonInventorySwapAreaClick(click: Click): void;
-    acceptNonInventorySwapAreaClick(click: Click): void;
-    acceptSwapAreaLeftClick(click: Click): void;
-    acceptSwapAreaRightClick(click: Click): void;
-    acceptCraftingClick(click: Click): void;
-
+  
+    /**
+     * See click types here https://wiki.vg/Protocol#Click_Window
+     */
+  
+    /**
+     * accepts click mode 0 with mouseButton 0 or 1
+     */
+    mouseClick(click: Click): void;
+  
+    /**
+     * accepts click mode 1 with mouseButton 0 or 1 (identical behaviour)
+     */
+    shiftClick(click: Click): void;
+ 
+    /**
+     * accepts click mode 2 with mouseButton 0 (hotbarStart) to 8 (hotbarEnd) representing the hotbar slots
+     */
+    numberClick(click: Click): void;
+  
+    /**
+     * accepts click mode 4 with mouseButton 0 (drops one of the item) or 1 (drops all of the item) 
+     */
+    dropClick(click: Click): void;
+  
+    /**
+     * fills matching Slots within specified range with given item and if after filling the item is still present it searches for an empty slot in the range
+     * @param item item used to fill slots
+     * @param start start slot to begin the search from
+     * @param end end slot to end the search
+     * @param lastToFirst if true the matching Slots will be filled from the back
+     */
+    fillAndDump(item: Item, start: number, end: number, lastToFirst: boolean): void;
+  
+    /**
+     * fills slots with specified item
+     * @param slots slots to fill with the item
+     * @param lastToFirst if true the matching Slots will be filled from the back
+     */
+    fillSlotsWithItem(slots: Array<Item>, item: Item, lastToFirst: boolean): void;
+  
+    /**
+     * fills slot with specified item
+     * @param itemToFill item of which the count should be increased
+     * @param itemToTake item of which the count should be decreased
+     */
+    fillSlotWithItem(itemToFill: Item, itemToTake: Item): void;
+  
+    /**
+     * fills slot with selectedItem (the item held in mouse cursor)
+     * @param item item of which the count should be increased
+     * @param everything if true as many as possible will be transfered
+     */
+    fillSlotWithSelectedItem (item: Item, everything: boolean): void;
+  
+    /**
+     * searches for empty slot to dump the specified item
+     * @param item item which should be dumped
+     * @param start start slot to begin the search from
+     * @param end end slot to end the search
+     * @param lastToFirst if true item slot will be searched from the back
+     */
+    dumpItem(item: Item, start: number, end: number, lastToFirst: boolean): void;
+  
+    /**
+     * splits the slot in half and holds the split in mouse cursor
+     * @param item item to split
+     */
+    splitSlot(item: Item): void;
+  
+    /**
+     * swaps item with the item in mouse cursor
+     * @param item item to swap with
+     */
+    swapSelectedItem(item: Item): void;
+  
+    /**
+     * drops item held in mouse cursor
+     * @param all if true whole item stack will be dropped (else just one)
+     */
+    dropSelectedItem(all: boolean): void;
+  
     /**
      * Change the slot to contain the newItem. Emit the updateSlot events.
      * @param slot {number}
@@ -74,6 +148,19 @@ export class Window extends EventEmitter {
     updateSlot(slot: number, newItem: Item): void;
 
     /**
+     * 
+     * returns array of items in the given range matching the one specified
+     * @param start start slot to begin the search from
+     * @param end end slot to end the search
+     * @param itemType numerical id that you are looking for
+     * @param metadata metadata value that you are looking for. null means unspecified
+     * @param notFull (optional) - if true, means that the returned item should not be at its stackSize
+     * @param nbt nbt data for the item you are looking for. null means unspecified
+     */
+    findItemsRange(start: number, end: number, itemType: number, metadata: number | null, notFull: boolean, nbt: any): Array<Item> | null;
+
+    /**
+     * returns item in the given range matching the one specified
      * @param start start slot to begin the search from
      * @param end end slot to end the search
      * @param itemType numerical id that you are looking for
@@ -98,7 +185,7 @@ export class Window extends EventEmitter {
      * @param metadata metadata value that you are looking for. null means unspecified
      * @param notFull (optional) - if true, means that the returned item should not be at its stackSize
      */
-    findInventoryItem(itemType: number | string, metadata: number | null, notFull: boolean): Item | null;
+    findInventoryItem(itemType: number, metadata: number | null, notFull: boolean): Item | null;
 
     /**
      * Search in the container of the window
@@ -106,7 +193,7 @@ export class Window extends EventEmitter {
      * @param metadata metadata value that you are looking for. null means unspecified
      * @param notFull (optional) - if true, means that the returned item should not be at its stackSize
      */
-    findContainerItem(itemType: number, metadata: number | null, notFull: boolean): Item | null
+    findContainerItem(itemType: number, metadata: number | null, notFull: boolean): Item | null;
 
     /**
      * Return the id of the first empty slot between start and end
@@ -130,6 +217,13 @@ export class Window extends EventEmitter {
      * @param hotbarFirst DEFAULT: true
      */
     firstEmptyInventorySlot(hotbarFirst: boolean): number | null;
+
+    /**
+     * Returns how much items there are ignoring what the item is
+     * @param start
+     * @param end
+     */
+    sumRange(start: number, end: number): number;
 
     /**
      * Returns how many item you have of the given type, between slots start and end
@@ -189,12 +283,12 @@ export class Window extends EventEmitter {
      */
     clear(blockId?: number, count?: number): void;
 }
-export interface Click {
+declare interface Click {
     mode: number;
     mouseButton: number;
     slot: number;
 }
-export interface WindowInfo {
+declare interface WindowInfo {
     type: number | string;
     inventory: { start: number, end: number };
     slots: number;
@@ -202,39 +296,9 @@ export interface WindowInfo {
     requireConfirmation: boolean;
 }
 
-export interface WindowsExports {
+declare interface WindowsExports {
     createWindow(id: number, type: number | string, title: string, slotCount?: number): Window;
     Window: typeof Window;
-    windows: {[key in WindowName]: WindowInfo};
+    windows: {[key: string]: WindowInfo};
 }
-
 export declare function loader(mcVersion: string): WindowsExports;
-
-export default loader;
-
-export type WindowName = 
-    'minecraft:inventory' |
-    'minecraft:generic_9x1' |
-    'minecraft:generic_9x2' |
-    'minecraft:generic_9x3' |
-    'minecraft:generic_9x4' |
-    'minecraft:generic_9x5' |
-    'minecraft:generic_9x6' |
-    'minecraft:generic_3x3' |
-    'minecraft:anvil' |
-    'minecraft:beacon' |
-    'minecraft:blast_furnace' |
-    'minecraft:brewing_stand' |
-    'minecraft:crafting' |
-    'minecraft:enchantment' |
-    'minecraft:furnace' |
-    'minecraft:grindstone' |
-    'minecraft:hopper' |
-    'minecraft:lectern' |
-    'minecraft:loom' |
-    'minecraft:merchant' |
-    'minecraft:shulker_box' |
-    'minecraft:smithing' |
-    'minecraft:smoker' |
-    'minecraft:cartography' |
-    'minecraft:stonecutter'
