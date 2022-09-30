@@ -57,7 +57,7 @@ function loader (mcVersion) {
   }
 
   const windowByType = new Map()
-  for (const key in windows) {
+  for (const key of Object.keys(windows)) {
     const win = windows[key]
     if (win) {
       windowByType.set(win.type, win)
