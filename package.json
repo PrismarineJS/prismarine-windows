@@ -1,6 +1,6 @@
 {
   "name": "prismarine-windows",
-  "version": "2.2.0",
+  "version": "2.5.0",
   "description": "Represent minecraft windows",
   "main": "index.js",
   "scripts": {
@@ -13,13 +13,13 @@
     "url": "git+ssh://git@github.com/PrismarineJS/prismarine-windows.git"
   },
   "dependencies": {
-    "minecraft-data": "^2.81.0",
-    "prismarine-item": "^1.8.0"
+    "minecraft-data": "^3.0.0",
+    "prismarine-item": "^1.5.0",
+    "typed-emitter": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^17.0.4",
-    "mocha": "^10.0.0",
-    "standard": "^16.0.3"
+    "@types/node": "^18.6.4",
+    "standard": "^17.0.0"
   },
   "keywords": [
     "minecraft",

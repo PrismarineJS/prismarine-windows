@@ -2,9 +2,10 @@
 /// <reference types="prismarine-item" />
 
 import {EventEmitter} from 'events';
+import TypedEmitter from 'typed-emitter'
 import {Item} from 'prismarine-item';
 
-declare class Window extends EventEmitter {
+export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmitter<T>)<T> {
     constructor (id: number, type: number | string, title: string, slotCount: number, inventorySlotsRange: { start: number, end: number }, craftingResultSlot: number, requiresConfirmation: boolean);
 
     /**
@@ -215,7 +216,7 @@ declare class Window extends EventEmitter {
      * Return the id of the first empty slot in the inventory, start looking in the hotbar first if the flag is set
      * @param hotbarFirst DEFAULT: true
      */
-    firstEmptyInventorySlot(hotbarFirst: boolean): number | null;
+    firstEmptyInventorySlot(hotbarFirst?: boolean): number | null;
 
     /**
      * Returns how much items there are ignoring what the item is
