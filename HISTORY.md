@@ -1,6 +1,6 @@
 ## 2.5.0
 
-* Extend the events used for windows
+* Extend the events used for  windows
 
 ## 2.4.4
 * update mcdata
