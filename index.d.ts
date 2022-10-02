@@ -110,9 +110,9 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
     /**
      * Fills slot with selectedItem (the item held in mouse cursor)
      * @param item item of which the count should be increased
-     * @param everything if true as many as possible will be transfered
+     * @param untilFull if true as many as possible will be transfered
      */
-    fillSlotWithSelectedItem (item: Item, everything: boolean): void;
+    fillSlotWithSelectedItem (item: Item, untilFull: boolean): void;
   
     /**
      * Searches for empty slot to dump the specified item
@@ -137,9 +137,9 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
   
     /**
      * Drops item held in mouse cursor
-     * @param all if true whole item stack will be dropped (else just one)
+     * @param untilEmpty if true whole item stack will be dropped (else just one)
      */
-    dropSelectedItem(all: boolean): void;
+    dropSelectedItem(untilEmpty: boolean): void;
   
     /**
      * Change the slot to contain the newItem. Emit the updateSlot events.
