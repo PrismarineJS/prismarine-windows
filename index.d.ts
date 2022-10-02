@@ -219,7 +219,7 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
     firstEmptyInventorySlot(hotbarFirst?: boolean): number | null;
 
     /**
-     * Returns how much items there are ignoring what the item is
+     * Returns how much items there are ignoring what the item is, between slots start and end
      * @param start
      * @param end
      */
