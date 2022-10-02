@@ -67,7 +67,7 @@ function loader (mcVersion) {
 
   return {
     createWindow: (id, type, title, slotCount = undefined) => {
-      let winData = windowByType.get(type) || windows[type]
+      let winData = windowByType.get(type) ?? windows[type]
       if (!winData) {
         if (slotCount === undefined) return null
         winData = {
