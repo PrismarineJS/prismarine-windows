@@ -42,7 +42,7 @@ function loader (registryOrVersion) {
     // const inventorySlots = registry.supportFeature("shieldSlot") ? 46 : 45
     const inventorySlots = registry.isNewerOrEqualTo('1.9') ? 46 : 45// this line should be discarded for the one above when the corresponding feature is added to minecraft-data
     windows = {
-      'minecraft:inventory': { type: 'minecraft:inventory', inventory: { start: 9, end: 44 }, slots: inventorySlots ? 46 : 45, craft: 0, requireConfirmation: true },
+      'minecraft:inventory': { type: 'minecraft:inventory', inventory: { start: 9, end: 44 }, slots: inventorySlots, craft: 0, requireConfirmation: true },
       'minecraft:chest': null,
       'minecraft:crafting_table': { type: 'minecraft:crafting_table', inventory: { start: 10, end: 45 }, slots: 46, craft: 0, requireConfirmation: true },
       'minecraft:furnace': { type: 'minecraft:furnace', inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true },
