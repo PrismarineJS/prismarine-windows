@@ -1,3 +1,7 @@
+## 2.6.1
+
+* fix typo
+
 ## 2.6.0
 
 * mcData to registry refactoring + anticipation of feature check refactoring
