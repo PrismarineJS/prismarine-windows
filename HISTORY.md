@@ -1,3 +1,7 @@
+## 2.6.0
+
+* mcData to registry refactoring + anticipation of feature check refactoring
+
 ## 2.5.0
 
 * Extend the events used for  windows
