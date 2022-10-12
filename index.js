@@ -1,10 +1,10 @@
-function loader (mcVersion) {
-  const Item = require('prismarine-item')(mcVersion)
+function loader (registryOrVersion) {
+  const registry = typeof registryOrVersion === 'string' ? require('prismarine-registry')(registryOrVersion) : registryOrVersion
+  const Item = require('prismarine-item')(registry)
   const Window = require('./lib/Window')(Item)
-  const mcData = require('minecraft-data')(mcVersion)
 
   let windows
-  if (mcData.isNewerOrEqualTo('1.14')) {
+  if (registry.isNewerOrEqualTo('1.14')) {
     // https://wiki.vg/Inventory
     windows = {}
     let protocolId = -1
@@ -29,7 +29,7 @@ function loader (mcVersion) {
     windows['minecraft:loom'] = { type: protocolId++, inventory: { start: 4, end: 39 }, slots: 40, craft: 3, requireConfirmation: true }
     windows['minecraft:merchant'] = { type: protocolId++, inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true }
     windows['minecraft:shulker_box'] = { type: protocolId++, inventory: { start: 27, end: 62 }, slots: 63, craft: -1, requireConfirmation: true }
-    if (mcData.isNewerOrEqualTo('1.16')) {
+    if (registry.isNewerOrEqualTo('1.16')) {
       windows['minecraft:smithing'] = { type: protocolId++, inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true }
     }
     windows['minecraft:smoker'] = { type: protocolId++, inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true }
@@ -38,7 +38,7 @@ function loader (mcVersion) {
   } else {
     // https://wiki.vg/index.php?title=Inventory&oldid=14093
     windows = {
-      'minecraft:inventory': { type: 'minecraft:inventory', inventory: { start: 9, end: 44 }, slots: mcData.isNewerOrEqualTo('1.9') ? 46 : 45, craft: 0, requireConfirmation: true },
+      'minecraft:inventory': { type: 'minecraft:inventory', inventory: { start: 9, end: 44 }, slots: registry.isNewerOrEqualTo('1.9') ? 46 : 45, craft: 0, requireConfirmation: true },
       'minecraft:chest': null,
       'minecraft:crafting_table': { type: 'minecraft:crafting_table', inventory: { start: 10, end: 45 }, slots: 46, craft: 0, requireConfirmation: true },
       'minecraft:furnace': { type: 'minecraft:furnace', inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true },
