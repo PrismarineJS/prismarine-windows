@@ -4,8 +4,7 @@ function loader (registryOrVersion) {
   const Window = require('./lib/Window')(Item)
 
   let windows
-  // if (registry.supportFeature("village&pillageInventoryWindows")) {
-  if (registry.isNewerOrEqualTo('1.14')) { // this line should be discarded for the one above when the corresponding feature is added to minecraft-data
+  if (registry.supportFeature('village&pillageInventoryWindows')) {
     // https://wiki.vg/Inventory
     windows = {}
     let protocolId = -1
@@ -30,8 +29,7 @@ function loader (registryOrVersion) {
     windows['minecraft:loom'] = { type: protocolId++, inventory: { start: 4, end: 39 }, slots: 40, craft: 3, requireConfirmation: true }
     windows['minecraft:merchant'] = { type: protocolId++, inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true }
     windows['minecraft:shulker_box'] = { type: protocolId++, inventory: { start: 27, end: 62 }, slots: 63, craft: -1, requireConfirmation: true }
-    // if (registry.supportFeature("netherUpdateInventoryWindows")) {
-    if (registry.isNewerOrEqualTo('1.16')) { // this line should be discarded for the one above when the corresponding feature is added to minecraft-data
+    if (registry.supportFeature('netherUpdateInventoryWindows')) {
       windows['minecraft:smithing'] = { type: protocolId++, inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true }
     }
     windows['minecraft:smoker'] = { type: protocolId++, inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true }
@@ -39,8 +37,7 @@ function loader (registryOrVersion) {
     windows['minecraft:stonecutter'] = { type: protocolId++, inventory: { start: 2, end: 37 }, slots: 38, craft: 1, requireConfirmation: true }
   } else {
     // https://wiki.vg/index.php?title=Inventory&oldid=14093
-    // const inventorySlots = registry.supportFeature("shieldSlot") ? 46 : 45
-    const inventorySlots = registry.isNewerOrEqualTo('1.9') ? 46 : 45// this line should be discarded for the one above when the corresponding feature is added to minecraft-data
+    const inventorySlots = registry.supportFeature('shieldSlot') ? 46 : 45
     windows = {
       'minecraft:inventory': { type: 'minecraft:inventory', inventory: { start: 9, end: 44 }, slots: inventorySlots, craft: 0, requireConfirmation: true },
       'minecraft:chest': null,
