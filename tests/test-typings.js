@@ -1,0 +1,36 @@
+const windows = require('../')('1.8')
+const Item = require('prismarine-item')('1.8')
+
+const inv = windows.createWindow(1, 'minecraft:inventory', 'inv', 46)
+inv.craftingResultSlot = 3
+const click = {mode: 0, mouseButton: 0, slot: 9}
+const item = new Item(256, 1)
+inv.updateSlot(9, item)
+inv.acceptClick(click)
+inv.acceptOutsideWindowClick(click)
+
+inv.acceptNonInventorySwapAreaClick(click)
+inv.acceptNonInventorySwapAreaClick(click)
+inv.acceptSwapAreaLeftClick(click)
+inv.acceptSwapAreaRightClick({mode: 0, mouseButton: 1, slot: 9})
+
+inv.acceptOutsideWindowClick(click)
+inv.acceptCraftingClick({mode: 0, mouseButton: 0, slot: 3})
+
+inv.findItemRange(0,5,256)
+inv.findItemRangeName(0,5,item.name)
+inv.findInventoryItem(0)
+inv.findContainerItem(0)
+inv.firstEmptySlotRange(0,5)
+inv.firstEmptyHotbarSlot()
+inv.firstEmptyContainerSlot()
+inv.firstEmptyInventorySlot()
+inv.countRange(0,5,0)
+inv.itemsRange(0,5)
+inv.count(0)
+inv.items()
+inv.containerCount(0)
+inv.containerItems()
+inv.emptySlotCount()
+inv.transactionRequiresConfirmation()
+inv.clear()

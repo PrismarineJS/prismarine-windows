@@ -4,7 +4,8 @@
 import {EventEmitter} from 'events';
 import TypedEmitter from 'typed-emitter'
 import {Item} from 'prismarine-item';
-
+import { Registry } from 'prismarine-registry'
+ 
 export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmitter<T>)<T> {
     constructor (id: number, type: number | string, title: string, slotCount: number, inventorySlotsRange: { start: number, end: number }, craftingResultSlot: number, requiresConfirmation: boolean);
 
@@ -58,14 +59,13 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
      */
     selectedItem: Item | null;
 
-    acceptClick(click: Click): void;
-    acceptOutsideWindowClick(click: Click): void;
-    acceptInventoryClick(click: Click): void;
-    acceptNonInventorySwapAreaClick(click: Click): void;
-    acceptNonInventorySwapAreaClick(click: Click): void;
-    acceptSwapAreaLeftClick(click: Click): void;
-    acceptSwapAreaRightClick(click: Click): void;
-    acceptCraftingClick(click: Click): void;
+    acceptClick(click: Click): InventoryChange[];
+    acceptOutsideWindowClick(click: Click): InventoryChange[];
+    acceptInventoryClick(click: Click): InventoryChange[];
+    acceptNonInventorySwapAreaClick(click: Click): InventoryChange[];
+    acceptSwapAreaLeftClick(click: Click): InventoryChange[];
+    acceptSwapAreaRightClick(click: Click): InventoryChange[];
+    acceptCraftingClick(click: Click): InventoryChange[];
 
     /**
      * Change the slot to contain the newItem. Emit the updateSlot events.
@@ -195,6 +195,10 @@ export interface Click {
     mouseButton: number;
     slot: number;
 }
+export interface InventoryChange {
+    location: number,
+    item: Item
+}
 export interface WindowInfo {
     type: number | string;
     inventory: { start: number, end: number };
@@ -209,7 +213,7 @@ export interface WindowsExports {
     windows: {[key in WindowName]: WindowInfo};
 }
 
-export declare function loader(mcVersion: string): WindowsExports;
+export declare function loader(registryOrVersion: string | Registry): WindowsExports;
 
 export default loader;
 
