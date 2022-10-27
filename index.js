@@ -1,7 +1,7 @@
 function loader (registryOrVersion) {
   const registry = typeof registryOrVersion === 'string' ? require('prismarine-registry')(registryOrVersion) : registryOrVersion
-  const Item = require('prismarine-item')(registry)
-  const Window = require('./lib/Window')(Item)
+  const Item = require('prismarine-item')(registry.version.version)
+  const Window = require('./lib/Window')(Item, registry)
 
   let windows
   if (registry.supportFeature('village&pillageInventoryWindows')) {
