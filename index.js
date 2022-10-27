@@ -1,6 +1,6 @@
 function loader (registryOrVersion) {
   const registry = typeof registryOrVersion === 'string' ? require('prismarine-registry')(registryOrVersion) : registryOrVersion
-  const Item = require('prismarine-item')(registry.version.version)
+  const Item = require('prismarine-item')(registry.version.minecraftVersion)
   const Window = require('./lib/Window')(Item, registry)
 
   let windows
