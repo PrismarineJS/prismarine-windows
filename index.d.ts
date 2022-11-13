@@ -26,7 +26,7 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
     /**
      * Map of slot index to Item instance. null if the slot is empty
      */
-    slots: Array<Item>;
+    slots: Array<Item | null>;
 
     /**
      * Slot from where the player inventory start in the window
