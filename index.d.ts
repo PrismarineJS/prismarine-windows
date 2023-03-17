@@ -58,9 +58,14 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
      */
     selectedItem: Item | null;
     
+    /**
+     * accepts Clicks of with any mode, mouseButton and slot
+     * @param click click object to accept
+     * @param gamemode to know when certain clicks are allowed
+     */
     acceptClick(click: Click, gamemode: number): void;
 
-    /*
+    /**
      * deprecated, call acceptClick(click) instead
      */
     acceptOutsideWindowClick(click: Click): void;
@@ -90,12 +95,12 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
     numberClick(click: Click): void;
 
     /**
-     * Accepts click mode 3 with mouseButton 2 (gets a stack of the item at the slot into the selectedItem) 
+     * Accepts click mode 3 with mouseButton 2 (gets a stack of the item at the slot into the selectedItem)
      */
     middleClick(click: Click, gamemode: number): void;
 
     /**
-     * Accepts click mode 4 with mouseButton 0 (drops one of the item) or 1 (drops all of the item) 
+     * Accepts click mode 4 with mouseButton 0 (drops one of the item) or 1 (drops all of the item)
      */
     dropClick(click: Click): void;
   
