@@ -26,6 +26,7 @@ chest.updateSlot(chest.inventoryEnd - 2, new Item(1, 44))
 chest.updateSlot(chest.inventoryEnd - 3, new Item(1, 44))
 
 inv.updateSlot(inv.inventoryEnd - 1, new Item(301, 1))
+inv.updateSlot(inv.inventoryEnd - 2, new Item(1, 1))
 
 describe('mode 0 | normal click', () => {
   describe('mouseButton 0', () => {
@@ -105,6 +106,20 @@ describe('mode 2 | number click', () => {
     it('number click from slot with item to slot with different item', () => {
       chest.acceptClick(createClick(2, 5, 5))
       assert(!chest.slots[5] && chest.slots[59].type === 2 && chest.slots[59]?.count === 3 && chest.slots[54]?.count === 4 && chest.slots[54].type === 1)
+    })
+  })
+})
+
+describe('mode 3 | middle click', () => {
+  describe('mouseButton 2', () => {
+    it('get stack into selectedItem (gamemode 0)', () => {
+      inv.acceptClick(createClick(3, 2, inv.inventoryEnd - 2, true), 0)
+      assert(!inv.selectedItem)
+    })
+
+    it('get stack into selectedItem (gamemode 1)', () => {
+      inv.acceptClick(createClick(3, 2, inv.inventoryEnd - 2, true), 1)
+      assert(Item.equal(inv.selectedItem, new Item(1, inv.slots[inv.inventoryEnd - 2].stackSize)))
     })
   })
 })
