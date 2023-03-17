@@ -66,7 +66,6 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
     acceptOutsideWindowClick(click: Click): void;
     acceptInventoryClick(click: Click): void;
     acceptNonInventorySwapAreaClick(click: Click): void;
-    acceptNonInventorySwapAreaClick(click: Click): void;
     acceptSwapAreaLeftClick(click: Click): void;
     acceptSwapAreaRightClick(click: Click): void;
     acceptCraftingClick(click: Click): void;
