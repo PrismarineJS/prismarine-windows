@@ -83,6 +83,11 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
      * Accepts click mode 4 with mouseButton 0 (drops one of the item) or 1 (drops all of the item) 
      */
     dropClick(click: Click, gamemode: number): void;
+
+    /**
+     * Accepts click mode 3 with mouseButton 2 (gets a stack of the item at the slot into the selectedItem) 
+     */
+    middleClick(click: Click, gamemode: number): void;
   
     /**
      * Fills within specified range with given item and dumps remaining items if present and possible
