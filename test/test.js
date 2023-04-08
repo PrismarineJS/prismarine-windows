@@ -2,6 +2,8 @@ const { describe, it } = require('mocha')
 
 const assert = require('assert')
 
+const registry = require('prismarine-registry')('1.8')
+
 const windows = require('..')('1.8')
 const Item = require('prismarine-item')('1.8')
 
@@ -16,16 +18,19 @@ const createClick = (mode, mouseButton, slot, useInv = false) => ({
   item: slot === -999 ? null : useInv ? inv.slots[slot] : chest.slots[slot]
 })
 
-chest.updateSlot(0, new Item(1, 64))
-chest.updateSlot(1, new Item(1, 1))
-chest.updateSlot(3, new Item(1, 63))
-chest.updateSlot(5, new Item(2, 3))
-chest.updateSlot(chest.inventoryEnd - 1, new Item(1, 44))
-chest.updateSlot(chest.inventoryEnd - 2, new Item(1, 44))
-chest.updateSlot(chest.inventoryEnd - 3, new Item(1, 44))
+const stoneId = registry.itemsByName.stone.id
+const grassId = registry.itemsByName.grass.id
 
-inv.updateSlot(inv.inventoryEnd - 1, new Item(301, 1))
-inv.updateSlot(inv.inventoryEnd - 2, new Item(1, 1))
+chest.updateSlot(0, new Item(stoneId, 64))
+chest.updateSlot(1, new Item(stoneId, 1))
+chest.updateSlot(3, new Item(stoneId, 63))
+chest.updateSlot(5, new Item(grassId, 3))
+chest.updateSlot(chest.inventoryEnd - 1, new Item(stoneId, 44))
+chest.updateSlot(chest.inventoryEnd - 2, new Item(stoneId, 44))
+chest.updateSlot(chest.inventoryEnd - 3, new Item(stoneId, 44))
+
+inv.updateSlot(inv.inventoryEnd - 1, new Item(registry.itemsByName.leather_boots.id, 1))
+inv.updateSlot(inv.inventoryEnd - 2, new Item(stoneId, 1))
 
 describe('mode 0 | normal click', () => {
   describe('mouseButton 0', () => {
