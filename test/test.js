@@ -1,5 +1,4 @@
-const mocha = require('mocha')
-const { describe, it } = mocha
+const { describe, it } = require('mocha')
 
 const assert = require('assert')
 
