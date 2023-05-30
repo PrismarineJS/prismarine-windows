@@ -6,24 +6,6 @@ const windows = require('..')(mcVersion)
 const Item = require('prismarine-item')(mcVersion)
 const registry = require('prismarine-registry')(mcVersion)
 
-const takenIds = []
-function genericTypeToId (type) {
-  if (type.startsWith('stackable')) {
-    const stackSize = +type.split('_')[1]
-    for (const id of Object.keys(registry.items)) {
-      if (registry.items[id].stackSize === stackSize) {
-        if (!takenIds.includes(id)) {
-          takenIds.push(id)
-          return +id
-        }
-      }
-    }
-  } else if (type === 'armor') {
-    // lazy implementation, randomize for more coverage
-    return registry.itemsByName.leather_boots.id
-  }
-}
-
 function generateAssertFunctions (stack) {
   return {
     empty: function () {
@@ -58,13 +40,13 @@ function createMockWindow (type, slotCount = undefined) {
   const mockWindow = windows.createWindow(1, 'minecraft:' + type, type, slotCount ?? (type === 'chest' ? 27 : undefined))
 
   mockWindow.prepareSlot = function (slotShorthand, count, type) {
-    mockWindow.updateSlot(getSlot(slotShorthand, mockWindow.inventoryEnd), new Item((typeof type === 'string' ? genericTypeToId(type) : type), count))
+    mockWindow.updateSlot(getSlot(slotShorthand, mockWindow.inventoryEnd), new Item(type, count))
 
     return mockWindow
   }
 
   mockWindow.prepareSelectedItem = function (count, type) {
-    mockWindow.selectedItem = new Item((typeof type === 'string' ? genericTypeToId(type) : type), count)
+    mockWindow.selectedItem = new Item(type, count)
 
     return mockWindow
   }
@@ -94,8 +76,8 @@ function createMockWindow (type, slotCount = undefined) {
   return mockWindow
 }
 
-const firstStackId = genericTypeToUniqueId('stackable_64')
-const secondStackId = genericTypeToUniqueId('stackable_64')
+const firstStackId = 1
+const secondStackId = 2
 
 describe('mode 0 | normal click', () => {
   describe('mouseButton 0', () => {
