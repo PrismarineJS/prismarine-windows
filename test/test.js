@@ -255,6 +255,7 @@ describe('mode 3 | middle click', () => {
       mockWindow.executeClick(3, 2, 0)
 
       // expect no change
+      mockWindow.assertSelectedItem().empty()
     })
 
     it('get stack into selectedItem (gamemode 1)', () => {
