@@ -1,7 +1,7 @@
 const { describe, it } = require('mocha')
 const assert = require('assert')
 
-const mcVersion = '1.8'
+const mcVersion = '1.9'
 const windows = require('..')(mcVersion)
 const Item = require('prismarine-item')(mcVersion)
 const registry = require('prismarine-registry')(mcVersion)
@@ -217,15 +217,15 @@ describe('mode 2 | number click', () => {
 
       mockWindow.executeClick(2, 0, 0)
 
-      mockWindow.assertSlot(0).empty()
-      mockWindow.assertSlot(-9).notEmpty().count(64).type(firstStackId)
+      if (mcVersion === '1.8') {
+        mockWindow.assertSlot(0).empty()
+        mockWindow.assertSlot(-9).notEmpty().count(64).type(firstStackId)
+      } else {
+        // expect nothing to happen
+      }
     })
 
     it('from slot with item to slot with different item', () => {
-      // this test only applies to version 1.8.
-      // the >=1.9 behaviour simply swaps the item,
-      // which i didn't bother to write tests for.
-
       const mockWindow = createMockWindow('chest')
         .prepareSlot(0, 64, firstStackId)
         .prepareSlot(-1, 64, secondStackId)
@@ -234,9 +234,14 @@ describe('mode 2 | number click', () => {
       // slot 0 = windowStart
       mockWindow.executeClick(2, 8, 0)
 
-      mockWindow.assertSlot(0).empty()
-      mockWindow.assertSlot(-1).notEmpty().count(64).type(firstStackId)
-      mockWindow.assertSlot(-9).notEmpty().count(64).type(secondStackId)
+      if (mcVersion === '1.8') {
+        mockWindow.assertSlot(0).empty()
+        mockWindow.assertSlot(-1).notEmpty().count(64).type(firstStackId)
+        mockWindow.assertSlot(-9).notEmpty().count(64).type(secondStackId)
+      } else {
+        mockWindow.assertSlot(0).notEmpty().count(64).type(secondStackId)
+        mockWindow.assertSlot(-1).notEmpty().count(64).type(firstStackId)
+      }
     })
   })
 })
