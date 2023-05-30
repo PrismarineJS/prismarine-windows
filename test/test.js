@@ -176,9 +176,9 @@ describe('mode 1 | shift click', () => {
 
       mockWindow.executeClick(1, 0, -1)
 
+      mockWindow.assertSlot(-1).empty()
       // 8 is the slot for boots
       mockWindow.assertSlot(8).notEmpty().type(someBoots).count(1)
-      mockWindow.assertSlot(8).empty()
     })
   })
 })
