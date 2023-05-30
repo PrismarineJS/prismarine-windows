@@ -1,7 +1,7 @@
 const { describe, it } = require('mocha')
 const assert = require('assert')
 
-const mcVersion = '1.9'
+const mcVersion = '1.8'
 const windows = require('..')(mcVersion)
 const Item = require('prismarine-item')(mcVersion)
 const registry = require('prismarine-registry')(mcVersion)
@@ -217,11 +217,11 @@ describe('mode 2 | number click', () => {
 
       mockWindow.executeClick(2, 0, 0)
 
-      if (mcVersion === '1.8') {
+      if (registry.version['>=']('1.9')) {
+        // expect nothing to happen
+      } else {
         mockWindow.assertSlot(0).empty()
         mockWindow.assertSlot(-9).notEmpty().count(64).type(firstStackId)
-      } else {
-        // expect nothing to happen
       }
     })
 
@@ -234,13 +234,13 @@ describe('mode 2 | number click', () => {
       // slot 0 = windowStart
       mockWindow.executeClick(2, 8, 0)
 
-      if (mcVersion === '1.8') {
+      if (registry.version['>=']('1.9')) {
+        mockWindow.assertSlot(0).notEmpty().count(64).type(secondStackId)
+        mockWindow.assertSlot(-1).notEmpty().count(64).type(firstStackId)
+      } else {
         mockWindow.assertSlot(0).empty()
         mockWindow.assertSlot(-1).notEmpty().count(64).type(firstStackId)
         mockWindow.assertSlot(-9).notEmpty().count(64).type(secondStackId)
-      } else {
-        mockWindow.assertSlot(0).notEmpty().count(64).type(secondStackId)
-        mockWindow.assertSlot(-1).notEmpty().count(64).type(firstStackId)
       }
     })
   })
