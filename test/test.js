@@ -8,26 +8,26 @@ const windows = require('..')(mcVersion)
 const Item = require('prismarine-item')(mcVersion)
 const registry = require('prismarine-registry')(mcVersion)
 
-function generateAssertFunctions (stack) {
+function getAssertFunctions (slot) {
   return {
     empty: function () {
-      assert.equal(stack, null)
+      assert.equal(slot, null)
       return this
     },
     notEmpty: function () {
-      assert.notEqual(stack, null)
+      assert.notEqual(slot, null)
       return this
     },
     count: function (count) {
-      assert.equal(stack.count, count)
+      assert.equal(slot.count, count)
       return this
     },
     hasMaxCount: function () {
-      assert.equal(stack.count, stack.stackSize)
+      assert.equal(slot.count, slot.stackSize)
       return this
     },
     type: function (type) {
-      assert.equal(stack.type, type)
+      assert.equal(slot.type, type)
       return this
     }
   }
@@ -67,37 +67,38 @@ function createTestWindow (type, slotCount = undefined) {
   }
 
   testWindow.assertSlot = function (slotShorthand) {
-    const stack = testWindow.slots[getSlot(slotShorthand, testWindow.inventoryEnd)]
-    return generateAssertFunctions(stack)
+    const slot = testWindow.slots[getSlot(slotShorthand, testWindow.inventoryEnd)]
+    return getAssertFunctions(slot)
   }
 
   testWindow.assertSelectedItem = function () {
-    return generateAssertFunctions(testWindow.selectedItem)
+    return getAssertFunctions(testWindow.selectedItem)
   }
 
   return testWindow
 }
 
 // item ids
-const firstStack = 1
-const secondStack = 2
+const firstItem = 1
+const secondItem = 2
 
 describe('mode 0 | normal click', () => {
   describe('mouseButton 0', () => {
     it('pickup item', () => {
-      const testWindow = createTestWindow('chest').prepareSlot(0, 64, firstStack)
+      const testWindow = createTestWindow('chest').prepareSlot(0, 64, firstItem)
 
       testWindow.executeClick(0, 0, 0)
 
-      testWindow.assertSelectedItem().count(64).type(firstStack)
+
+      testWindow.assertSelectedItem().count(64).type(firstItem)
     })
   })
 
   describe('mouseButton 1', () => {
     it('drop one of selected Item into a slot (same item)', () => {
       const testWindow = createTestWindow('chest')
-        .prepareSelectedItem(64, firstStack)
-        .prepareSlot(0, 1, firstStack)
+        .prepareSelectedItem(64, firstItem)
+        .prepareSlot(0, 1, firstItem)
 
       testWindow.executeClick(0, 1, 0)
 
@@ -107,7 +108,7 @@ describe('mode 0 | normal click', () => {
 
     it('drop one of selected Item into a slot (empty slot)', () => {
       const testWindow = createTestWindow('chest')
-        .prepareSelectedItem(64, firstStack)
+        .prepareSelectedItem(64, firstItem)
 
       testWindow.executeClick(0, 1, 0)
 
@@ -117,7 +118,7 @@ describe('mode 0 | normal click', () => {
 
     it('drop selected Item into a slot (empty slot)', () => {
       const testWindow = createTestWindow('chest')
-        .prepareSelectedItem(1, firstStack)
+        .prepareSelectedItem(1, firstItem)
 
       testWindow.executeClick(0, 1, 0)
 
@@ -129,8 +130,8 @@ describe('mode 0 | normal click', () => {
   describe('mouseButton 0', () => {
     it('drop all of selected Item into a slot (almost full with same item)', () => {
       const testWindow = createTestWindow('chest')
-        .prepareSelectedItem(64, firstStack)
-        .prepareSlot(0, 60, firstStack)
+        .prepareSelectedItem(64, firstItem)
+        .prepareSlot(0, 60, firstItem)
 
       testWindow.executeClick(0, 0, 0)
 
@@ -140,12 +141,12 @@ describe('mode 0 | normal click', () => {
 
     it('drop selected Item into empty slot', () => {
       const testWindow = createTestWindow('chest')
-        .prepareSelectedItem(1, firstStack)
+        .prepareSelectedItem(1, firstItem)
 
       testWindow.executeClick(0, 0, 0)
 
       testWindow.assertSelectedItem().empty()
-      testWindow.assertSlot(0).notEmpty().count(1).type(firstStack)
+      testWindow.assertSlot(0).notEmpty().count(1).type(firstItem)
     })
   })
 })
@@ -154,21 +155,21 @@ describe('mode 1 | shift click', () => {
   describe('mouseButton 0', () => {
     it('shift out of chest into inventory', () => {
       const testWindow = createTestWindow('chest')
-        .prepareSlot(0, 64, firstStack)
+        .prepareSlot(0, 64, firstItem)
 
       testWindow.executeClick(1, 0, 0)
 
       testWindow.assertSlot(0).empty()
-      testWindow.assertSlot(-1).notEmpty().count(64).type(firstStack)
+      testWindow.assertSlot(-1).notEmpty().count(64).type(firstItem)
     })
 
     it('shift out of inventory into chest', () => {
       const testWindow = createTestWindow('chest')
-        .prepareSlot(-1, 64, firstStack)
+        .prepareSlot(-1, 64, firstItem)
 
       testWindow.executeClick(1, 0, -1)
 
-      testWindow.assertSlot(0).notEmpty().count(64).type(firstStack)
+      testWindow.assertSlot(0).notEmpty().count(64).type(firstItem)
       testWindow.assertSlot(-1).empty()
     })
 
@@ -190,33 +191,33 @@ describe('mode 2 | number click', () => {
   describe('mouseButton 0', () => {
     it('from full slot into empty slot', () => {
       const testWindow = createTestWindow('chest')
-        .prepareSlot(0, 64, firstStack)
+        .prepareSlot(0, 64, firstItem)
 
       // mouseButton 0 = hotbarStart
       // slot 0 = windowStart
       testWindow.executeClick(2, 0, 0)
 
-      testWindow.assertSlot(-9).notEmpty().count(64).type(firstStack)
+      testWindow.assertSlot(-9).notEmpty().count(64).type(firstItem)
       testWindow.assertSlot(0).empty()
     })
 
     it('from empty slot into full slot', () => {
       const testWindow = createTestWindow('chest')
         // -9 = hotbarStart
-        .prepareSlot(-9, 64, firstStack)
+        .prepareSlot(-9, 64, firstItem)
 
       // mouseButton 0 = hotbarStart
       // slot 0 = windowStart
       testWindow.executeClick(2, 0, 0)
 
       testWindow.assertSlot(-9).empty()
-      testWindow.assertSlot(0).notEmpty().count(64).type(firstStack)
+      testWindow.assertSlot(0).notEmpty().count(64).type(firstItem)
     })
 
     it('from slot with item to slot with same item', () => {
       const testWindow = createTestWindow('chest')
-        .prepareSlot(-9, 32, firstStack)
-        .prepareSlot(0, 32, firstStack)
+        .prepareSlot(-9, 32, firstItem)
+        .prepareSlot(0, 32, firstItem)
 
       testWindow.executeClick(2, 0, 0)
 
@@ -224,26 +225,26 @@ describe('mode 2 | number click', () => {
         // expect nothing to happen
       } else {
         testWindow.assertSlot(0).empty()
-        testWindow.assertSlot(-9).notEmpty().count(64).type(firstStack)
+        testWindow.assertSlot(-9).notEmpty().count(64).type(firstItem)
       }
     })
 
     it('from slot with item to slot with different item', () => {
       const testWindow = createTestWindow('chest')
-        .prepareSlot(0, 64, firstStack)
-        .prepareSlot(-1, 64, secondStack)
+        .prepareSlot(0, 64, firstItem)
+        .prepareSlot(-1, 64, secondItem)
 
       // mouseButton 8 = hotbarEnd
       // slot 0 = windowStart
       testWindow.executeClick(2, 8, 0)
 
       if (registry.version['>=']('1.9')) {
-        testWindow.assertSlot(0).notEmpty().count(64).type(secondStack)
-        testWindow.assertSlot(-1).notEmpty().count(64).type(firstStack)
+        testWindow.assertSlot(0).notEmpty().count(64).type(secondItem)
+        testWindow.assertSlot(-1).notEmpty().count(64).type(firstItem)
       } else {
         testWindow.assertSlot(0).empty()
-        testWindow.assertSlot(-1).notEmpty().count(64).type(firstStack)
-        testWindow.assertSlot(-9).notEmpty().count(64).type(secondStack)
+        testWindow.assertSlot(-1).notEmpty().count(64).type(firstItem)
+        testWindow.assertSlot(-9).notEmpty().count(64).type(secondItem)
       }
     })
   })
@@ -253,7 +254,7 @@ describe('mode 3 | middle click', () => {
   describe('mouseButton 2', () => {
     it('get stack into selectedItem (gamemode 0)', () => {
       const testWindow = createTestWindow('chest')
-        .prepareSlot(0, 1, firstStack)
+        .prepareSlot(0, 1, firstItem)
 
       testWindow.executeClick(3, 2, 0)
 
@@ -263,11 +264,11 @@ describe('mode 3 | middle click', () => {
 
     it('get stack into selectedItem (gamemode 1)', () => {
       const testWindow = createTestWindow('chest')
-        .prepareSlot(0, 1, firstStack)
+        .prepareSlot(0, 1, firstItem)
 
       testWindow.executeClick(3, 2, 0, /* gamemode = */1)
 
-      testWindow.assertSelectedItem().notEmpty().count(64).type(firstStack)
+      testWindow.assertSelectedItem().notEmpty().count(64).type(firstItem)
     })
   })
 })
@@ -276,18 +277,18 @@ describe('mode 4 | drop click', () => {
   describe('mouseButton 0', () => {
     it('drop 1 of stack', () => {
       const testWindow = createTestWindow('chest')
-        .prepareSlot(0, 64, firstStack)
+        .prepareSlot(0, 64, firstItem)
 
       testWindow.executeClick(4, 0, 0)
 
-      testWindow.assertSlot(0).notEmpty().count(64 - 1).type(firstStack)
+      testWindow.assertSlot(0).notEmpty().count(64 - 1).type(firstItem)
     })
   })
 
   describe('mouseButton 1', () => {
     it('drop full stack', () => {
       const testWindow = createTestWindow('chest')
-        .prepareSlot(0, 64, firstStack)
+        .prepareSlot(0, 64, firstItem)
 
       testWindow.executeClick(4, 1, 0)
 
