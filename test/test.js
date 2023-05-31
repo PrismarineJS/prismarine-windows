@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 
-const { describe, it } = require('mocha')
+const { describe, it, afterEach } = require('mocha')
 const assert = require('assert')
 
 const mcVersion = '1.8'
@@ -33,16 +33,21 @@ function getAssertFunctions (slot) {
   }
 }
 
-function getSlot (slotShorthand, inventoryEnd) {
+function getActualSlot (slotShorthand, inventoryEnd) {
   // negative values start from the end of the inventory
   return slotShorthand < 0 ? inventoryEnd + slotShorthand : slotShorthand
+}
+
+function getSlotShorthand (actualSlot, inventoryEnd) {
+  const negativeSlotShorthand = actualSlot - inventoryEnd
+  return Math.abs(negativeSlotShorthand) < actualSlot ? negativeSlotShorthand : actualSlot
 }
 
 function createTestWindow (type, slotCount = undefined) {
   const testWindow = windows.createWindow(1, 'minecraft:' + type, type, slotCount ?? (type === 'chest' ? 27 : undefined))
 
   testWindow.prepareSlot = function (slotShorthand, count, type) {
-    testWindow.updateSlot(getSlot(slotShorthand, testWindow.inventoryEnd), new Item(type, count))
+    testWindow.updateSlot(getActualSlot(slotShorthand, testWindow.inventoryEnd), new Item(type, count))
 
     return testWindow
   }
@@ -54,7 +59,7 @@ function createTestWindow (type, slotCount = undefined) {
   }
 
   testWindow.executeClick = function (mode, mouseButton, slotShorthand, gamemode) {
-    const slot = getSlot(slotShorthand, testWindow.inventoryEnd)
+    const slot = getActualSlot(slotShorthand, testWindow.inventoryEnd)
     const click = {
       slot,
       mouseButton,
@@ -80,7 +85,7 @@ function createTestWindow (type, slotCount = undefined) {
   }
 
   testWindow.assertSlot = function (slotShorthand) {
-    let slot = getSlot(slotShorthand, testWindow.inventoryEnd)
+    let slot = getActualSlot(slotShorthand, testWindow.inventoryEnd)
     if (!testWindow.assertedSlots.includes(slot)) {
       testWindow.assertedSlots.push(slot)
     }
@@ -104,7 +109,8 @@ let testWindow = null
 afterEach(function () {
   testWindow.updatedSlots.forEach((slot) => {
     if (!testWindow.assertedSlots.includes(slot)) {
-      assert.fail(`slot ${slot} updated, but it has not been asserted`)
+      const slotShorthand = getSlotShorthand(slot, testWindow.inventoryEnd)
+      assert.fail(`slot ${slotShorthand}${slotShorthand !== slot ? ` (actual: ${slot})` : ''} updated, but has not been asserted`)
     }
   })
 })
