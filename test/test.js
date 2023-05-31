@@ -11,23 +11,26 @@ const registry = require('prismarine-registry')(mcVersion)
 function getAssertFunctions (slot) {
   return {
     empty: function () {
-      assert.equal(slot, null)
+      assert.equal(slot, null, 'slot is not empty')
       return this
     },
     notEmpty: function () {
-      assert.notEqual(slot, null)
+      assert.notEqual(slot, null, 'slot is empty')
       return this
     },
     count: function (count) {
-      assert.equal(slot.count, count)
+      assert.ok(this.notEmpty())
+      assert.equal(slot.count, count, 'slot count doesn\'t match')
       return this
     },
     hasMaxCount: function () {
-      assert.equal(slot.count, slot.stackSize)
+      assert.ok(this.notEmpty())
+      assert.equal(slot.count, slot.stackSize, 'slot doesn\'t have max count')
       return this
     },
     type: function (type) {
-      assert.equal(slot.type, type)
+      assert.ok(this.notEmpty())
+      assert.equal(slot.type, type, `slot doesn't have type ${type}`)
       return this
     }
   }
@@ -118,7 +121,8 @@ afterEach(function () {
 describe('mode 0 | normal click', () => {
   describe('mouseButton 0', () => {
     it('pickup item', () => {
-      testWindow = createTestWindow('chest').prepareSlot(0, 64, firstItem)
+      testWindow = createTestWindow('chest')
+        .prepareSlot(0, 64, firstItem)
 
       testWindow.executeClick(0, 0, 0)
 
