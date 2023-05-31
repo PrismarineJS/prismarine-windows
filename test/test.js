@@ -256,6 +256,8 @@ describe('mode 2 | number click', () => {
 
       if (registry.version['>=']('1.9')) {
         // expect nothing to happen
+        testWindow.assertSlot(0).count(32)
+        testWindow.assertSlot(-9).count(32)
       } else {
         testWindow.assertSlot(0).empty()
         testWindow.assertSlot(-9).notEmpty().count(64).type(firstItem)
