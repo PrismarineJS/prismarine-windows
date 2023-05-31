@@ -1,3 +1,5 @@
+/* eslint-env mocha */
+
 const { describe, it } = require('mocha')
 const assert = require('assert')
 
