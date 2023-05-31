@@ -116,7 +116,7 @@ describe('mode 0 | normal click', () => {
 
       testWindow.executeClick(0, 0, 0)
 
-
+      testWindow.assertSlot(0).empty()
       testWindow.assertSelectedItem().count(64).type(firstItem)
     })
   })
@@ -253,6 +253,7 @@ describe('mode 2 | number click', () => {
       } else {
         testWindow.assertSlot(0).empty()
         testWindow.assertSlot(-9).notEmpty().count(64).type(firstItem)
+        testWindow.assertSlot(-8).empty()
       }
     })
 
