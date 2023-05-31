@@ -80,10 +80,11 @@ function createTestWindow (type, slotCount = undefined) {
   }
 
   testWindow.assertSlot = function (slotShorthand) {
-    const slot = testWindow.slots[getSlot(slotShorthand, testWindow.inventoryEnd)]
-    if (!testWindow.assertedSlots.includes(slot.slot)) {
-      testWindow.assertedSlots.push(slot.slot)
+    let slot = getSlot(slotShorthand, testWindow.inventoryEnd)
+    if (!testWindow.assertedSlots.includes(slot)) {
+      testWindow.assertedSlots.push(slot)
     }
+    slot = testWindow.slots[slot]
     return getAssertFunctions(slot)
   }
 
