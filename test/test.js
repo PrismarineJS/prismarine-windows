@@ -10,26 +10,26 @@ const Item = require('prismarine-item')(registry)
 
 function getAssertFunctions (slot) {
   return {
-    empty: function () {
+    isEmpty: function () {
       assert.equal(slot, null, 'slot is not empty')
       return this
     },
-    notEmpty: function () {
+    isNotEmpty: function () {
       assert.notEqual(slot, null, 'slot is empty')
       return this
     },
-    count: function (count) {
-      assert.ok(this.notEmpty())
+    hasCount: function (count) {
+      this.isNotEmpty()
       assert.equal(slot.count, count, 'slot count doesn\'t match')
       return this
     },
     hasMaxCount: function () {
-      assert.ok(this.notEmpty())
+      this.isNotEmpty()
       assert.equal(slot.count, slot.stackSize, 'slot doesn\'t have max count')
       return this
     },
-    type: function (type) {
-      assert.ok(this.notEmpty())
+    hasType: function (type) {
+      this.isNotEmpty()
       assert.equal(slot.type, type, `slot doesn't have type ${type}`)
       return this
     }
@@ -126,8 +126,8 @@ describe('mode 0 | normal click', () => {
 
       testWindow.executeClick(0, 0, 0)
 
-      testWindow.assertSlot(0).empty()
-      testWindow.assertSelectedItem().count(64).type(firstItem)
+      testWindow.assertSlot(0).isEmpty()
+      testWindow.assertSelectedItem().hasCount(64).hasType(firstItem)
     })
   })
 
@@ -139,8 +139,8 @@ describe('mode 0 | normal click', () => {
 
       testWindow.executeClick(0, 1, 0)
 
-      testWindow.assertSelectedItem().count(63)
-      testWindow.assertSlot(0).count(2)
+      testWindow.assertSelectedItem().hasCount(63)
+      testWindow.assertSlot(0).hasCount(2)
     })
 
     it('drop one of selected Item into a slot (empty slot)', () => {
@@ -149,8 +149,8 @@ describe('mode 0 | normal click', () => {
 
       testWindow.executeClick(0, 1, 0)
 
-      testWindow.assertSelectedItem().count(63)
-      testWindow.assertSlot(0).count(1)
+      testWindow.assertSelectedItem().hasCount(63)
+      testWindow.assertSlot(0).hasCount(1)
     })
 
     it('drop selected Item into a slot (empty slot)', () => {
@@ -159,8 +159,8 @@ describe('mode 0 | normal click', () => {
 
       testWindow.executeClick(0, 1, 0)
 
-      testWindow.assertSelectedItem().empty()
-      testWindow.assertSlot(0).count(1)
+      testWindow.assertSelectedItem().isEmpty()
+      testWindow.assertSlot(0).hasCount(1)
     })
   })
 
@@ -172,8 +172,8 @@ describe('mode 0 | normal click', () => {
 
       testWindow.executeClick(0, 0, 0)
 
-      testWindow.assertSelectedItem().count(60)
-      testWindow.assertSlot(0).count(64)
+      testWindow.assertSelectedItem().hasCount(60)
+      testWindow.assertSlot(0).hasCount(64)
     })
 
     it('drop selected Item into empty slot', () => {
@@ -182,8 +182,8 @@ describe('mode 0 | normal click', () => {
 
       testWindow.executeClick(0, 0, 0)
 
-      testWindow.assertSelectedItem().empty()
-      testWindow.assertSlot(0).notEmpty().count(1).type(firstItem)
+      testWindow.assertSelectedItem().isEmpty()
+      testWindow.assertSlot(0).isNotEmpty().hasCount(1).hasType(firstItem)
     })
   })
 })
@@ -196,8 +196,8 @@ describe('mode 1 | shift click', () => {
 
       testWindow.executeClick(1, 0, 0)
 
-      testWindow.assertSlot(0).empty()
-      testWindow.assertSlot(-1).notEmpty().count(64).type(firstItem)
+      testWindow.assertSlot(0).isEmpty()
+      testWindow.assertSlot(-1).isNotEmpty().hasCount(64).hasType(firstItem)
     })
 
     it('shift out of inventory into chest', () => {
@@ -206,8 +206,8 @@ describe('mode 1 | shift click', () => {
 
       testWindow.executeClick(1, 0, -1)
 
-      testWindow.assertSlot(0).notEmpty().count(64).type(firstItem)
-      testWindow.assertSlot(-1).empty()
+      testWindow.assertSlot(0).isNotEmpty().hasCount(64).hasType(firstItem)
+      testWindow.assertSlot(-1).isEmpty()
     })
 
     it.skip('shift out of inventory into armor slot (unimplemented)', () => {
@@ -217,9 +217,9 @@ describe('mode 1 | shift click', () => {
 
       testWindow.executeClick(1, 0, -1)
 
-      testWindow.assertSlot(-1).empty()
+      testWindow.assertSlot(-1).isEmpty()
       // 8 is the slot for boots
-      testWindow.assertSlot(8).notEmpty().type(someBoots).count(1)
+      testWindow.assertSlot(8).isNotEmpty().hasType(someBoots).hasCount(1)
     })
   })
 })
@@ -234,8 +234,8 @@ describe('mode 2 | number click', () => {
       // slot 0 = windowStart
       testWindow.executeClick(2, 0, 0)
 
-      testWindow.assertSlot(-9).notEmpty().count(64).type(firstItem)
-      testWindow.assertSlot(0).empty()
+      testWindow.assertSlot(-9).isNotEmpty().hasCount(64).hasType(firstItem)
+      testWindow.assertSlot(0).isEmpty()
     })
 
     it('from empty slot into full slot', () => {
@@ -247,8 +247,8 @@ describe('mode 2 | number click', () => {
       // slot 0 = windowStart
       testWindow.executeClick(2, 0, 0)
 
-      testWindow.assertSlot(-9).empty()
-      testWindow.assertSlot(0).notEmpty().count(64).type(firstItem)
+      testWindow.assertSlot(-9).isEmpty()
+      testWindow.assertSlot(0).isNotEmpty().hasCount(64).hasType(firstItem)
     })
 
     it('from slot with item to slot with same item', () => {
@@ -260,12 +260,12 @@ describe('mode 2 | number click', () => {
 
       if (registry.version['>=']('1.9')) {
         // expect nothing to happen
-        testWindow.assertSlot(0).count(32)
-        testWindow.assertSlot(-9).count(32)
+        testWindow.assertSlot(0).hasCount(32)
+        testWindow.assertSlot(-9).hasCount(32)
       } else {
-        testWindow.assertSlot(0).empty()
-        testWindow.assertSlot(-9).notEmpty().count(64).type(firstItem)
-        testWindow.assertSlot(-8).empty()
+        testWindow.assertSlot(0).isEmpty()
+        testWindow.assertSlot(-9).isNotEmpty().hasCount(64).hasType(firstItem)
+        testWindow.assertSlot(-8).isEmpty()
       }
     })
 
@@ -279,12 +279,12 @@ describe('mode 2 | number click', () => {
       testWindow.executeClick(2, 8, 0)
 
       if (registry.version['>=']('1.9')) {
-        testWindow.assertSlot(0).notEmpty().count(64).type(secondItem)
-        testWindow.assertSlot(-1).notEmpty().count(64).type(firstItem)
+        testWindow.assertSlot(0).isNotEmpty().hasCount(64).hasType(secondItem)
+        testWindow.assertSlot(-1).isNotEmpty().hasCount(64).hasType(firstItem)
       } else {
-        testWindow.assertSlot(0).empty()
-        testWindow.assertSlot(-1).notEmpty().count(64).type(firstItem)
-        testWindow.assertSlot(-9).notEmpty().count(64).type(secondItem)
+        testWindow.assertSlot(0).isEmpty()
+        testWindow.assertSlot(-1).isNotEmpty().hasCount(64).hasType(firstItem)
+        testWindow.assertSlot(-9).isNotEmpty().hasCount(64).hasType(secondItem)
       }
     })
   })
@@ -299,7 +299,7 @@ describe('mode 3 | middle click', () => {
       testWindow.executeClick(3, 2, 0)
 
       // expect no change
-      testWindow.assertSelectedItem().empty()
+      testWindow.assertSelectedItem().isEmpty()
     })
 
     it('get stack into selectedItem (gamemode 1)', () => {
@@ -308,7 +308,7 @@ describe('mode 3 | middle click', () => {
 
       testWindow.executeClick(3, 2, 0, /* gamemode = */1)
 
-      testWindow.assertSelectedItem().notEmpty().count(64).type(firstItem)
+      testWindow.assertSelectedItem().isNotEmpty().hasCount(64).hasType(firstItem)
     })
   })
 })
@@ -321,7 +321,7 @@ describe('mode 4 | drop click', () => {
 
       testWindow.executeClick(4, 0, 0)
 
-      testWindow.assertSlot(0).notEmpty().count(64 - 1).type(firstItem)
+      testWindow.assertSlot(0).isNotEmpty().hasCount(64 - 1).hasType(firstItem)
     })
   })
 
@@ -332,7 +332,7 @@ describe('mode 4 | drop click', () => {
 
       testWindow.executeClick(4, 1, 0)
 
-      testWindow.assertSlot(0).empty()
+      testWindow.assertSlot(0).isEmpty()
     })
   })
 })
