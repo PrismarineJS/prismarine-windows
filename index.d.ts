@@ -57,7 +57,7 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
      * In vanilla client, this is the item you are holding with the mouse cursor.
      */
     selectedItem: Item | null;
-    
+
     /**
      * accepts Clicks of with any mode, mouseButton and slot
      * @param click click object to accept
@@ -82,21 +82,21 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
 
     /** @deprecated use {@link acceptClick} instead */
     acceptCraftingClick(click: Click): void;
-  
+
     /**
      * See click types here https://wiki.vg/Protocol#Click_Window
      */
-  
+
     /**
      * Accepts click mode 0 with mouseButton 0 or 1
      */
     mouseClick(click: Click): void;
-  
+
     /**
      * Accepts click mode 1 with mouseButton 0 or 1 (identical behaviour)
      */
     shiftClick(click: Click): void;
- 
+
     /**
      * Accepts click mode 2 with mouseButton 0 (hotbarStart) to 8 (hotbarEnd) representing the hotbar slots
      */
@@ -111,7 +111,7 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
      * Accepts click mode 4 with mouseButton 0 (drops one of the item) or 1 (drops all of the item)
      */
     dropClick(click: Click): void;
-  
+
     /**
      * Fills within specified range with given item and dumps remaining items if present and possible
      * @param item item used to fill slots
@@ -120,28 +120,28 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
      * @param lastToFirst if true the matching Slots will be filled from the back
      */
     fillAndDump(item: Item, start: number, end: number, lastToFirst: boolean): void;
-  
+
     /**
      * Fills slots with specified item
      * @param slots slots to fill with the item
      * @param lastToFirst if true the matching Slots will be filled from the back
      */
     fillSlotsWithItem(slots: Array<Item>, item: Item, lastToFirst: boolean): void;
-  
+
     /**
      * Fills slot with specified item
      * @param itemToFill item of which the count should be increased
      * @param itemToTake item of which the count should be decreased
      */
     fillSlotWithItem(itemToFill: Item, itemToTake: Item): void;
-  
+
     /**
      * Fills slot with selectedItem (the item held in mouse cursor)
      * @param item item of which the count should be increased
      * @param untilFull if true as many as possible will be transfered
      */
     fillSlotWithSelectedItem (item: Item, untilFull: boolean): void;
-  
+
     /**
      * Searches for empty slot to dump the specified item
      * @param item item which should be dumped
@@ -150,25 +150,25 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
      * @param lastToFirst if true item slot will be searched from the back
      */
     dumpItem(item: Item, start: number, end: number, lastToFirst: boolean): void;
-  
+
     /**
      * Splits the slot in half and holds the split in mouse cursor
      * @param item item to split
      */
     splitSlot(item: Item): void;
-  
+
     /**
      * Swaps item with the item in mouse cursor
      * @param item item to swap with
      */
     swapSelectedItem(item: Item): void;
-  
+
     /**
      * Drops item held in mouse cursor
      * @param untilEmpty if true whole item stack will be dropped (else just one)
      */
     dropSelectedItem(untilEmpty: boolean): void;
-  
+
     /**
      * Change the slot to contain the newItem. Emit the updateSlot events.
      * @param slot {number}
@@ -333,7 +333,7 @@ export declare function loader(mcVersion: string): WindowsExports;
 
 export default loader;
 
-export type WindowName = 
+export type WindowName =
     'minecraft:inventory' |
     'minecraft:generic_9x1' |
     'minecraft:generic_9x2' |
