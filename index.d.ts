@@ -65,14 +65,22 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
      */
     acceptClick(click: Click, gamemode: number): void;
 
-    /**
-     * deprecated, call acceptClick(click) instead
-     */
+    /** @deprecated use {@link acceptClick} instead */
     acceptOutsideWindowClick(click: Click): void;
+
+    /** @deprecated use {@link acceptClick} instead */
     acceptInventoryClick(click: Click): void;
+
+    /** @deprecated use {@link acceptClick} instead */
     acceptNonInventorySwapAreaClick(click: Click): void;
+
+    /** @deprecated use {@link acceptClick} instead */
     acceptSwapAreaLeftClick(click: Click): void;
+
+    /** @deprecated use {@link acceptClick} instead */
     acceptSwapAreaRightClick(click: Click): void;
+
+    /** @deprecated use {@link acceptClick} instead */
     acceptCraftingClick(click: Click): void;
   
     /**
