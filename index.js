@@ -43,7 +43,7 @@ function loader (registryOrVersion) {
       'minecraft:chest': null,
       'minecraft:crafting_table': { type: 'minecraft:crafting_table', inventory: { start: 10, end: 45 }, slots: 46, craft: 0, requireConfirmation: true },
       'minecraft:furnace': { type: 'minecraft:furnace', inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true },
-      'minecraft:dispenser': { type: 'minecraft:dispenser', inventory: { start: 7 * 9, end: 7 * 9 + 35 }, slots: 7 * 9 + 36, craft: -1, requireConfirmation: true },
+      'minecraft:dispenser': { type: 'minecraft:dispenser', inventory: { start: 3 * 3, end: 3 * 3 + 35 }, slots: 3 * 3 + 36, craft: -1, requireConfirmation: true },
       'minecraft:enchanting_table': { type: 'minecraft:enchanting_table', inventory: { start: 2, end: 37 }, slots: 38, craft: -1, requireConfirmation: true },
       'minecraft:brewing_stand': { type: 'minecraft:brewing_stand', inventory: { start: 5, end: 40 }, slots: 41, craft: -1, requireConfirmation: true },
       'minecraft:container': null,
@@ -51,7 +51,7 @@ function loader (registryOrVersion) {
       'minecraft:beacon': { type: 'minecraft:beacon', inventory: { start: 1, end: 36 }, slots: 37, craft: -1, requireConfirmation: true },
       'minecraft:anvil': { type: 'minecraft:anvil', inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true },
       'minecraft:hopper': { type: 'minecraft:hopper', inventory: { start: 5, end: 40 }, slots: 41, craft: -1, requireConfirmation: true },
-      'minecraft:dropper': { type: 'minecraft:dropper', inventory: { start: 7 * 9, end: 7 * 9 + 35 }, slots: 7 * 9 + 36, craft: -1, requireConfirmation: true },
+      'minecraft:dropper': { type: 'minecraft:dropper', inventory: { start: 3 * 3, end: 3 * 3 + 35 }, slots: 3 * 3 + 36, craft: -1, requireConfirmation: true },
       'minecraft:shulker_box': { type: 'minecraft:shulker_box', inventory: { start: 27, end: 62 }, slots: 63, craft: -1, requireConfirmation: true },
       EntityHorse: null
     }
