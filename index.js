@@ -36,7 +36,7 @@ function loader (registryOrVersion) {
     windows['minecraft:cartography'] = { type: protocolId++, inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true }
     windows['minecraft:stonecutter'] = { type: protocolId++, inventory: { start: 2, end: 37 }, slots: 38, craft: 1, requireConfirmation: true }
   } else {
-    // https://wiki.vg/index.php?title=Inventory&oldid>=18093
+    // https://wiki.vg/index.php?title=Inventory&oldid=14093
     const inventorySlots = registry.supportFeature('shieldSlot') ? 46 : 45
     windows = {
       'minecraft:inventory': { type: 'minecraft:inventory', inventory: { start: 9, end: 44 }, slots: inventorySlots, craft: 0, requireConfirmation: true },
