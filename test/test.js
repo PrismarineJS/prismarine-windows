@@ -82,9 +82,11 @@ function createTestWindow (type, slotCount = undefined) {
 
     testWindow.on('updateSlot', onSlotUpdate)
 
-    testWindow.acceptClick(click, gamemode)
+    const changedSlots = testWindow.acceptClick(click, gamemode)
 
     testWindow.removeListener('updateSlot', onSlotUpdate)
+
+    return changedSlots
   }
 
   testWindow.assertSlot = function (slotShorthand) {
@@ -335,4 +337,20 @@ describe('mode 4 | drop click', () => {
       testWindow.assertSlot(0).isEmpty()
     })
   })
+})
+
+it('returning changed slots works', () => {
+  testWindow = createTestWindow('chest')
+    .prepareSlot(0, 64, firstItem)
+
+  const changedSlots = testWindow.executeClick(0, 0, 0)
+
+  testWindow.assertSlot(0).isEmpty()
+  testWindow.assertSelectedItem().isNotEmpty()
+
+  assert.ok(
+    changedSlots.find(changedSlot => changedSlot.location === 0) !== undefined &&
+    Item.fromNotch(changedSlots.find(changedSlot => changedSlot.location === 0)?.item) === null
+    // selectedItem isn't included in changedSlots
+  )
 })
