@@ -49,7 +49,7 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
     craftingResultSlot: number;
 
     /**
-     * boolean only false for chests in pre-1.14 versions.
+     * Boolean only false for chests in pre-1.14 versions.
      */
     requiresConfirmation: boolean;
 
@@ -58,14 +58,116 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
      */
     selectedItem: Item | null;
 
-    acceptClick(click: Click): void;
+    /**
+     * accepts Clicks of with any mode, mouseButton and slot
+     * @param click click object to accept
+     * @param gamemode to know when certain clicks are allowed
+     */
+    acceptClick(click: Click, gamemode: number): void;
+
+    /** @deprecated use {@link acceptClick} instead */
     acceptOutsideWindowClick(click: Click): void;
+
+    /** @deprecated use {@link acceptClick} instead */
     acceptInventoryClick(click: Click): void;
+
+    /** @deprecated use {@link acceptClick} instead */
     acceptNonInventorySwapAreaClick(click: Click): void;
-    acceptNonInventorySwapAreaClick(click: Click): void;
+
+    /** @deprecated use {@link acceptClick} instead */
     acceptSwapAreaLeftClick(click: Click): void;
+
+    /** @deprecated use {@link acceptClick} instead */
     acceptSwapAreaRightClick(click: Click): void;
+
+    /** @deprecated use {@link acceptClick} instead */
     acceptCraftingClick(click: Click): void;
+
+    /**
+     * See click types here https://wiki.vg/Protocol#Click_Window
+     */
+
+    /**
+     * Accepts click mode 0 with mouseButton 0 or 1
+     */
+    mouseClick(click: Click): void;
+
+    /**
+     * Accepts click mode 1 with mouseButton 0 or 1 (identical behaviour)
+     */
+    shiftClick(click: Click): void;
+
+    /**
+     * Accepts click mode 2 with mouseButton 0 (hotbarStart) to 8 (hotbarEnd) representing the hotbar slots
+     */
+    numberClick(click: Click): void;
+
+    /**
+     * Accepts click mode 3 with mouseButton 2 (gets a stack of the item at the slot into the selectedItem)
+     */
+    middleClick(click: Click, gamemode: number): void;
+
+    /**
+     * Accepts click mode 4 with mouseButton 0 (drops one of the item) or 1 (drops all of the item)
+     */
+    dropClick(click: Click): void;
+
+    /**
+     * Fills within specified range with given item and dumps remaining items if present and possible
+     * @param item item used to fill slots
+     * @param start start slot to begin the search from
+     * @param end end slot to end the search
+     * @param lastToFirst if true the matching Slots will be filled from the back
+     */
+    fillAndDump(item: Item, start: number, end: number, lastToFirst: boolean): void;
+
+    /**
+     * Fills slots with specified item
+     * @param slots slots to fill with the item
+     * @param lastToFirst if true the matching Slots will be filled from the back
+     */
+    fillSlotsWithItem(slots: Array<Item>, item: Item, lastToFirst: boolean): void;
+
+    /**
+     * Fills slot with specified item
+     * @param itemToFill item of which the count should be increased
+     * @param itemToTake item of which the count should be decreased
+     */
+    fillSlotWithItem(itemToFill: Item, itemToTake: Item): void;
+
+    /**
+     * Fills slot with selectedItem (the item held in mouse cursor)
+     * @param item item of which the count should be increased
+     * @param untilFull if true as many as possible will be transfered
+     */
+    fillSlotWithSelectedItem (item: Item, untilFull: boolean): void;
+
+    /**
+     * Searches for empty slot to dump the specified item
+     * @param item item which should be dumped
+     * @param start start slot to begin the search from
+     * @param end end slot to end the search
+     * @param lastToFirst if true item slot will be searched from the back
+     */
+    dumpItem(item: Item, start: number, end: number, lastToFirst: boolean): void;
+
+    /**
+     * Splits the slot in half and holds the split in mouse cursor
+     * @param item item to split
+     */
+    splitSlot(item: Item): void;
+
+    /**
+     * Swaps item with the item in mouse cursor
+     * @param item item to swap with
+     */
+    swapSelectedItem(item: Item): void;
+
+    /**
+     * Drops item held in mouse cursor
+     * @param untilEmpty if true whole item stack will be dropped (else just one)
+     */
+    dropSelectedItem(untilEmpty: boolean): void;
 
     /**
      * Change the slot to contain the newItem. Emit the updateSlot events.
@@ -75,6 +177,18 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
     updateSlot(slot: number, newItem: Item): void;
 
     /**
+     * Returns array of items in the given range matching the one specified
+     * @param start start slot to begin the search from
+     * @param end end slot to end the search
+     * @param itemType numerical id that you are looking for
+     * @param metadata metadata value that you are looking for. null means unspecified
+     * @param notFull (optional) - if true, means that the returned item should not be at its stackSize
+     * @param nbt nbt data for the item you are looking for. null means unspecified
+     */
+    findItemsRange(start: number, end: number, itemType: number, metadata: number | null, notFull: boolean, nbt: any): Array<Item> | null;
+
+    /**
+     * Returns item in the given range matching the one specified
      * @param start start slot to begin the search from
      * @param end end slot to end the search
      * @param itemType numerical id that you are looking for
@@ -99,7 +213,7 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
      * @param metadata metadata value that you are looking for. null means unspecified
      * @param notFull (optional) - if true, means that the returned item should not be at its stackSize
      */
-    findInventoryItem(itemType: number | string, metadata: number | null, notFull: boolean): Item | null;
+    findInventoryItem(itemType: number, metadata: number | null, notFull: boolean): Item | null;
 
     /**
      * Search in the container of the window
@@ -107,7 +221,7 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
      * @param metadata metadata value that you are looking for. null means unspecified
      * @param notFull (optional) - if true, means that the returned item should not be at its stackSize
      */
-    findContainerItem(itemType: number, metadata: number | null, notFull: boolean): Item | null
+    findContainerItem(itemType: number, metadata: number | null, notFull: boolean): Item | null;
 
     /**
      * Return the id of the first empty slot between start and end
@@ -131,6 +245,13 @@ export class Window<T = unknown> extends (EventEmitter as new <T>() => TypedEmit
      * @param hotbarFirst DEFAULT: true
      */
     firstEmptyInventorySlot(hotbarFirst?: boolean): number | null;
+
+    /**
+     * Returns how much items there are ignoring what the item is, between slots start and end
+     * @param start
+     * @param end
+     */
+    sumRange(start: number, end: number): number;
 
     /**
      * Returns how many item you have of the given type, between slots start and end
@@ -206,14 +327,13 @@ export interface WindowInfo {
 export interface WindowsExports {
     createWindow(id: number, type: number | string, title: string, slotCount?: number): Window;
     Window: typeof Window;
-    windows: {[key in WindowName]: WindowInfo};
+    windows: {[key: string]: WindowInfo};
 }
-
 export declare function loader(mcVersion: string): WindowsExports;
 
 export default loader;
 
-export type WindowName = 
+export type WindowName =
     'minecraft:inventory' |
     'minecraft:generic_9x1' |
     'minecraft:generic_9x2' |

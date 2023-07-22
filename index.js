@@ -1,7 +1,7 @@
 function loader (registryOrVersion) {
   const registry = typeof registryOrVersion === 'string' ? require('prismarine-registry')(registryOrVersion) : registryOrVersion
   const Item = require('prismarine-item')(registry)
-  const Window = require('./lib/Window')(Item)
+  const Window = require('./lib/Window')(Item, registry)
 
   let windows
   if (registry.supportFeature('village&pillageInventoryWindows')) {
@@ -68,8 +68,7 @@ function loader (registryOrVersion) {
 
   return {
     createWindow: (id, type, title, slotCount = undefined) => {
-      let winData = windowByType.get(type)
-      if (!winData) winData = windows[type]
+      let winData = windowByType.get(type) ?? windows[type]
       if (!winData) {
         if (slotCount === undefined) return null
         winData = {
