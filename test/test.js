@@ -349,8 +349,7 @@ it('returning changed slots works', () => {
   testWindow.assertSelectedItem().isNotEmpty()
 
   assert.ok(
-    changedSlots.find(changedSlot => changedSlot.location === 0) !== undefined &&
-    Item.fromNotch(changedSlots.find(changedSlot => changedSlot.location === 0)?.item) === null
+    changedSlots.length === 1 && changedSlots[0].location === 0 && Item.equal(changedSlots[0].item, testWindow.selectedItem)
     // selectedItem isn't included in changedSlots
   )
 })
