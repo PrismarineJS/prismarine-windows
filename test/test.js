@@ -289,6 +289,19 @@ describe('mode 2 | number click', () => {
         testWindow.assertSlot(-9).isNotEmpty().hasCount(64).hasType(secondItem)
       }
     })
+
+    it('same slot click does nothing', () => {
+      testWindow = createTestWindow('chest')
+        .prepareSlot(54, 64, firstItem)
+
+      // slot 54 = hotbarEnd
+      // mouseButton 8 = hotbarEnd
+      // slot 0 = windowStart
+      testWindow.executeClick(2, 8, 54)
+
+      // no asserts, test would fail regardless
+      // if something did change
+    })
   })
 })
 
