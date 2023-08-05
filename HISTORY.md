@@ -1,3 +1,8 @@
+### 2.8.0
+* [Export changedSlots computation to mineflayer (#102)](https://github.com/PrismarineJS/prismarine-windows/commit/98c3d66ae6aca733bb234d487686e2e534d1924d) (thanks @kaduvert)
+* [Ensure numberClick with same slots doesn't do anything (#103)](https://github.com/PrismarineJS/prismarine-windows/commit/50e6bfbdb9c3bc26f06ea45760527b2da53eb1f3) (thanks @kaduvert)
+* [Fix broken behaviour with craftingResultSlots (#101)](https://github.com/PrismarineJS/prismarine-windows/commit/51cc06e0f7dd39ddbb617962dfc1bb659fc172ce) (thanks @kaduvert)
+
 ### 2.7.0
 * [More click modes (with tests!) (#74)](https://github.com/PrismarineJS/prismarine-windows/commit/9f19fb357b2a96e09060fa5c2393b9041cc869fe) (thanks @kaduvert)
 * [Add command gh workflow allowing to use release command in comments (#98)](https://github.com/PrismarineJS/prismarine-windows/commit/6ddc90092d63f3838136d83e583d7c1d7ace3ae2) (thanks @rom1504)
