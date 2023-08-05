@@ -348,8 +348,7 @@ it('returning changed slots works', () => {
   testWindow.assertSlot(0).isEmpty()
   testWindow.assertSelectedItem().isNotEmpty()
 
-  assert.ok(
-    changedSlots.length === 1 && changedSlots[0].location === 0 && Item.equal(changedSlots[0].item, testWindow.selectedItem)
-    // selectedItem isn't included in changedSlots
-  )
+  assert.equal(changedSlots.length, 1)
+  assert.equal(changedSlots[0], 0)
+  // selectedItem isn't included in changedSlots
 })
