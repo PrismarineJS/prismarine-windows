@@ -16,6 +16,9 @@ function loader (registryOrVersion) {
     windows['minecraft:generic_9x5'] = { type: protocolId++, inventory: { start: 5 * 9, end: 5 * 9 + 35 }, slots: 5 * 9 + 36, craft: -1, requireConfirmation: true }
     windows['minecraft:generic_9x6'] = { type: protocolId++, inventory: { start: 6 * 9, end: 6 * 9 + 35 }, slots: 6 * 9 + 36, craft: -1, requireConfirmation: true }
     windows['minecraft:generic_3x3'] = { type: protocolId++, inventory: { start: 3 * 3, end: 3 * 3 + 35 }, slots: 3 * 3 + 36, craft: -1, requireConfirmation: true }
+    if (registry.version['>=']('1.20.3')) {
+      windows['minecraft:crafter_3x3'] = { type: protocolId++, inventory: { start: 10, end: 45 }, slots: 46, craft: -1, requireConfirmation: true }
+    }
     windows['minecraft:anvil'] = { type: protocolId++, inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true }
     windows['minecraft:beacon'] = { type: protocolId++, inventory: { start: 1, end: 36 }, slots: 37, craft: -1, requireConfirmation: true }
     windows['minecraft:blast_furnace'] = { type: protocolId++, inventory: { start: 3, end: 38 }, slots: 39, craft: 2, requireConfirmation: true }
