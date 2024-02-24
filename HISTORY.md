@@ -1,3 +1,6 @@
+### 2.9.0
+* [Add Crafter into windows list for 1.20.3+ (#105)](https://github.com/PrismarineJS/prismarine-windows/commit/e081bc34c8282ef2a380e3f09d5f57f19703fab7) (thanks @wgaylord)
+
 ### 2.8.0
 * [Export changedSlots computation to mineflayer (#102)](https://github.com/PrismarineJS/prismarine-windows/commit/98c3d66ae6aca733bb234d487686e2e534d1924d) (thanks @kaduvert)
 * [Ensure numberClick with same slots doesn't do anything (#103)](https://github.com/PrismarineJS/prismarine-windows/commit/50e6bfbdb9c3bc26f06ea45760527b2da53eb1f3) (thanks @kaduvert)
