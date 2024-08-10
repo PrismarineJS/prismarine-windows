@@ -9,7 +9,7 @@ Read the [API](API.md).
 ## Usage
 
 ```js
-const windows = require('./')('1.8')
+const windows = require('prismarine-windows')('1.8')
 const Item = require('prismarine-item')('1.8')
 
 const inv = windows.createWindow(1, 'minecraft:inventory', 'inv', 36)
