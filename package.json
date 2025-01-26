@@ -20,7 +20,7 @@
     "typed-emitter": "^2.1.0"
   },
   "devDependencies": {
-    "@types/node": "^20.2.1",
+    "@types/node": "^22.8.0",
     "standard": "^17.0.0",
     "mocha": "^10.0.0"
   },
