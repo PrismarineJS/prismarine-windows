@@ -1,3 +1,11 @@
+### 2.10.0
+* [Update CI to Node 24 (#136)](https://github.com/PrismarineJS/prismarine-windows/commit/00c4a96ba2c25f5063716d85d85fd2121943dde8) (thanks @rom1504)
+* [Fix publish condition for npm-publish v4 (#135)](https://github.com/PrismarineJS/prismarine-windows/commit/452dd4d6bf00bef904dd53498e200b5eda9e249c) (thanks @rom1504)
+* [Switch to trusted publishing via OIDC (#134)](https://github.com/PrismarineJS/prismarine-windows/commit/3a987511865d64497fb89a127398b4c611f34e97) (thanks @rom1504)
+* [Bump @types/node from 20.17.1 to 22.8.0 (#131)](https://github.com/PrismarineJS/prismarine-windows/commit/e6e2db81acffa1334b95dbafdd1230ddc8f3f482) (thanks @dependabot[bot])
+* [node 22 (#132)](https://github.com/PrismarineJS/prismarine-windows/commit/0fc95b94888f8741b222a76411076733c5a04f22) (thanks @rom1504)
+* [Fix README (#111)](https://github.com/PrismarineJS/prismarine-windows/commit/6280c5b9a9b3034cf02c7f851c2dd19c351c9f57) (thanks @ImFloriz)
+
 ### 2.9.0
 * [Add Crafter into windows list for 1.20.3+ (#105)](https://github.com/PrismarineJS/prismarine-windows/commit/e081bc34c8282ef2a380e3f09d5f57f19703fab7) (thanks @wgaylord)
 
