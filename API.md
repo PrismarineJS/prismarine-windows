@@ -146,7 +146,7 @@ Change the `slot` to contain the `newItem`. Emit the `updateSlot` events.
 
 #### window.findInventoryItem(item, metadata, [notFull])
 
-Search in the player inventory.
+Search in the player inventory, including the off-hand slot when the window has one.
 
  * `item` - numerical id or name that you are looking for [check the list](https://minecraft-data.prismarine.js.org/?d=items)
  * `metadata` -  metadata value that you are looking for. `null`
