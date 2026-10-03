@@ -365,3 +365,47 @@ it('returning changed slots works', () => {
   assert.equal(changedSlots[0], 0)
   // selectedItem isn't included in changedSlots
 })
+
+describe('findInventoryItem (#138)', () => {
+  // The off-hand slot only exists on 1.9+, so use a modern registry to get a
+  // window with a slot past inventoryEnd.
+  const registry19 = require('prismarine-registry')('1.16.5')
+  const windows19 = require('..')(registry19)
+  const Item19 = require('prismarine-item')(registry19)
+  const mutton = registry19.itemsByName.mutton.id
+
+  it('finds an item held in the off-hand slot', () => {
+    const win = windows19.createWindow(1, 'minecraft:inventory', 'inv')
+    const offhand = win.slots.length - 1
+    assert(offhand >= win.inventoryEnd, 'expected a slot past inventoryEnd')
+    win.updateSlot(offhand, new Item19(mutton, 1))
+
+    const foundById = win.findInventoryItem(mutton)
+    assert(foundById, 'off-hand item not found by id')
+    assert.equal(foundById.slot, offhand)
+
+    const foundByName = win.findInventoryItem('mutton')
+    assert(foundByName, 'off-hand item not found by name')
+    assert.equal(foundByName.slot, offhand)
+  })
+
+  it('still finds items in the regular inventory and hotbar', () => {
+    const win = windows19.createWindow(1, 'minecraft:inventory', 'inv')
+    win.updateSlot(win.inventoryStart, new Item19(mutton, 1))
+    win.updateSlot(win.hotbarStart, new Item19(mutton, 1))
+
+    const found = win.findInventoryItem(mutton)
+    assert(found, 'inventory item not found')
+    assert.equal(found.slot, win.inventoryStart)
+  })
+
+  it('does not return items from container slots', () => {
+    const win = windows19.createWindow(1, 'minecraft:generic_9x3', 'chest')
+    win.updateSlot(0, new Item19(mutton, 1)) // container slot
+
+    assert.equal(win.findInventoryItem(mutton), null)
+    const foundContainer = win.findContainerItem(mutton)
+    assert(foundContainer, 'container item not found')
+    assert.equal(foundContainer.slot, 0)
+  })
+})
